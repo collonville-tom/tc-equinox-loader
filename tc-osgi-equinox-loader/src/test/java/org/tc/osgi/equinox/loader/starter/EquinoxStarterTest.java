@@ -33,7 +33,8 @@ public class EquinoxStarterTest {
             Assert.assertEquals(true, EquinoxStarter.getInstance().check());
         } catch (final FieldTrackingAssignementException e) {
             Assert.fail(e.getMessage());
-        } catch (final Exception e) {
+        } catch (final Throwable e) {
+        	System.out.println(e.getStackTrace());
             Assert.fail(e.getMessage());
         }
 
