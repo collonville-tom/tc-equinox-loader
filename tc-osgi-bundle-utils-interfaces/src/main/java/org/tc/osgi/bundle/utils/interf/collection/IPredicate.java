@@ -9,12 +9,12 @@ package org.tc.osgi.bundle.utils.interf.collection;
  * @track SDD_BUNDLE_UTILS_010
  */
 public interface IPredicate<T> {
-	/**
-	 * evaluate.
-	 *
-	 * @param e
-	 *            T
-	 * @return boolean
-	 */
-	boolean evaluate(T e);
+    /**
+     * evaluate.
+     *
+     * @param e
+     *            T
+     * @return boolean
+     */
+    boolean evaluate(T e);
 }

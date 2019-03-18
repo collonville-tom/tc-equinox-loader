@@ -87,12 +87,12 @@ public final class EquinoxStarter {
     }
 
     public void compileParameters() throws FieldTrackingAssignementException, EquinoxConfigException, EquinoxCmdException {
-        this.args.add(this.getMode());
-        if (!this.getConfiguration().equals("")) {
-            this.args.add("-configuration");
-            this.args.add(this.getConfiguration());
+        args.add(getMode());
+        if (!getConfiguration().equals("")) {
+            args.add("-configuration");
+            args.add(getConfiguration());
         }
-        this.args.add(this.getDebugLevel());
+        args.add(getDebugLevel());
     }
 
     /**
@@ -104,11 +104,11 @@ public final class EquinoxStarter {
      * @throws EquinoxConfigException
      */
     public String getConfiguration() throws FieldTrackingAssignementException, EquinoxConfigException, EquinoxCmdException {
-        if (this.configuration == null) {
+        if (configuration == null) {
             XMLPropertyFile.getInstance(EquinoxPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "configuration");
         }
-        LoggerGestionnary.getInstance(EquinoxStarter.class).debug("Configuration :" + this.configuration);
-        return this.configuration;
+        LoggerGestionnary.getInstance(EquinoxStarter.class).debug("Configuration :" + configuration);
+        return configuration;
     }
 
     /**
@@ -117,9 +117,10 @@ public final class EquinoxStarter {
      * @return BundleContext
      */
     public BundleContext getContext() {
-    	if(this.context==null)
-    		LoggerGestionnary.getInstance(EquinoxStarter.class).warn("BundleContext is null maybe provoque major error");
-        return this.context;
+        if (context == null) {
+            LoggerGestionnary.getInstance(EquinoxStarter.class).warn("BundleContext is null maybe provoque major error");
+        }
+        return context;
     }
 
     /**
@@ -131,11 +132,11 @@ public final class EquinoxStarter {
      * @throws EquinoxConfigException
      */
     public String getDebugLevel() throws FieldTrackingAssignementException, EquinoxConfigException, EquinoxCmdException {
-        if (this.debugLevel == null) {
+        if (debugLevel == null) {
             XMLPropertyFile.getInstance(EquinoxPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "debugLevel");
         }
-        LoggerGestionnary.getInstance(EquinoxStarter.class).debug("DebugLevel :" + this.debugLevel);
-        return this.debugLevel;
+        LoggerGestionnary.getInstance(EquinoxStarter.class).debug("DebugLevel :" + debugLevel);
+        return debugLevel;
     }
 
     /**
@@ -147,11 +148,11 @@ public final class EquinoxStarter {
      * @throws EquinoxConfigException
      */
     public String getMode() throws FieldTrackingAssignementException, EquinoxConfigException, EquinoxCmdException {
-        if (this.mode == null) {
+        if (mode == null) {
             XMLPropertyFile.getInstance(EquinoxPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "mode");
         }
-        LoggerGestionnary.getInstance(EquinoxStarter.class).debug("Mode :" + this.mode);
-        return this.mode;
+        LoggerGestionnary.getInstance(EquinoxStarter.class).debug("Mode :" + mode);
+        return mode;
     }
 
     /**
@@ -159,7 +160,7 @@ public final class EquinoxStarter {
      * @param value String
      */
     public void setConfiguration(final String value) {
-        this.configuration = value;
+        configuration = value;
     }
 
     /**
@@ -171,7 +172,7 @@ public final class EquinoxStarter {
     public void start() throws EquinoxLoaderException {
         final String[] argType = {};
         LoggerGestionnary.getInstance(EquinoxStarter.class).info("Lancement de l'applicatif avec les arguments xml");
-        this.start(this.args.toArray(argType));
+        this.start(args.toArray(argType));
 
     }
 
@@ -186,11 +187,12 @@ public final class EquinoxStarter {
         try {
             if (!EclipseStarter.isRunning()) {
                 EclipseStarter.startup(_args, new Thread("EQUINOX-THREAD"));
-                if (this.context == null) {
+                if (context == null) {
                     LoggerGestionnary.getInstance(EquinoxStarter.class).warn("Le context bundle n'a pas ete correctement construit");
                 }
-                LoggerGestionnary.getInstance(EquinoxStarter.class).debug("Construction du context bundle a partir du system bundle context");
-                this.context = EclipseStarter.getSystemBundleContext();
+                LoggerGestionnary.getInstance(EquinoxStarter.class).debug(
+                    "Construction du context bundle a partir du system bundle context");
+                context = EclipseStarter.getSystemBundleContext();
             }
         } catch (final Exception e) {
             throw new EquinoxLoaderException("Une erreur inconnue est survenue", e);

@@ -5,21 +5,18 @@
 	<packaging>bundle</packaging>
 	<name>${project.artifactId}-${project.version}</name>
 	<description>Un bundle pour exposer des composants et utilitaires</description>
-
+	<version>${tc-osgi-bundle-utils.version}${tc-osgi-bundle-utils.pom}${tc-osgi-bundle-utils.snapshot}</version>
 
 	<properties>
-		<build>0.4.0</build>
-		<snapshot>-SNAPSHOT</snapshot>
-		<utils.interfaces.version>0.2.0</utils.interfaces.version>
-		<docker.latest>0.2.0</docker.latest>
+		<!-- necessaire a la construction du deb -->
+		<build>${tc-osgi-bundle-utils.version}</build>
 	</properties>
 
-	<version>${build}${snapshot}</version>
 	<dependencies>
 		<dependency>
 			<groupId>org.tc.osgi.bundle.utils</groupId>
 			<artifactId>tc-osgi-bundle-utils-interfaces</artifactId>
-			<version>${utils.interfaces.version}${snapshot}</version>
+			<version>${tc-osgi-bundle-utils-interfaces.version}${tc-osgi-bundle-utils-interfaces.pom}${tc-osgi-bundle-utils-interfaces.snapshot}</version>
 			<classifier>assembly</classifier>
 			<scope>compile</scope>
 		</dependency>
@@ -99,7 +96,7 @@
 							<images>
 								<image>
 									<build>
-										<from>${docker.login}/tc-osgi-bundle-utils-interfaces:${docker.latest}</from>
+										<from>${docker.login}/tc-osgi-bundle-utils-interfaces:${tc-osgi-bundle-utils-interfaces.latest}</from>
 									</build>
 								</image>
 							</images>

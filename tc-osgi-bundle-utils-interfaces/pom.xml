@@ -5,14 +5,12 @@
 	<packaging>bundle</packaging>
 	<name>${project.artifactId}-${project.version}</name>
 	<description>Un bundle pour exposer des composants et utilitaires</description>
+	<version>${tc-osgi-bundle-utils-interfaces.version}${tc-osgi-bundle-utils-interfaces.pom}${tc-osgi-bundle-utils-interfaces.snapshot}</version>
 	
-
 	<properties>
-		<build>0.2.0</build>
-		<snapshot>-SNAPSHOT</snapshot>
+		<!-- necessaire a la construction du deb -->
+		<build>${tc-osgi-bundle-utils-interfaces.version}</build>
 	</properties>
-
-	<version>${build}${snapshot}</version>
 	
 	<dependencies>
 		<dependency>

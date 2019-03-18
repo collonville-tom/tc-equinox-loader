@@ -12,29 +12,29 @@ import java.io.Serializable;
  */
 public interface ISerialTool<T extends Serializable> {
 
-	/**
-	 * read.
-	 *
-	 * @param name
-	 *            String
-	 * @param directory
-	 *            String
-	 * @return Object
-	 * @throws FileNotFoundException
-	 */
-	public T read(final String name, final String directory) throws FileNotFoundException;
+    /**
+     * read.
+     *
+     * @param name
+     *            String
+     * @param directory
+     *            String
+     * @return Object
+     * @throws FileNotFoundException
+     */
+    public T read(final String name, final String directory) throws FileNotFoundException;
 
-	/**
-	 * save.
-	 *
-	 * @param object
-	 *            Object
-	 * @param name
-	 *            String
-	 * @param directory
-	 *            String
-	 * @throws FileNotFoundException
-	 */
-	public void save(final T object, final String name, final String directory) throws FileNotFoundException;
+    /**
+     * save.
+     *
+     * @param object
+     *            Object
+     * @param name
+     *            String
+     * @param directory
+     *            String
+     * @throws FileNotFoundException
+     */
+    public void save(final T object, final String name, final String directory) throws FileNotFoundException;
 
 }

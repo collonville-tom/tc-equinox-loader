@@ -17,28 +17,28 @@ import org.tc.osgi.bundle.utils.interf.pattern.visitor.IVisitor;
  */
 public class AbstractDraftmanTest {
 
-	@Test
-	public void test() {
-		final AbstractDraftman draftman = new AbstractDraftman(null) {
+    @Test
+    public void test() {
+        final AbstractDraftman draftman = new AbstractDraftman(null) {
 
-			@Override
-			public String toString() {
-				return "Draftman test";
-			}
+            @Override
+            public String toString() {
+                return "Draftman test";
+            }
 
-			@Override
-			public void visit(final IVisitable o) {
-				o.toString();
-			}
-		};
-		new IVisitable() {
+            @Override
+            public void visit(final IVisitable o) {
+                o.toString();
+            }
+        };
+        new IVisitable() {
 
-			@Override
-			public void accept(final IVisitor visitor) {
-				visitor.visit(this);
-			}
-		}.accept(draftman);
+            @Override
+            public void accept(final IVisitor visitor) {
+                visitor.visit(this);
+            }
+        }.accept(draftman);
 
-	}
+    }
 
 }

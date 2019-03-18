@@ -1,44 +1,51 @@
 package org.tc.osgi.bundle.manager.core.bundle;
 
-public class TarGzBundle implements ITarGzBundle{
+public class TarGzBundle implements ITarGzBundle {
 
-	private String name;
-	private String version;
-	private String url;
+    private String name;
+    private String url;
+    private String version;
 
-	public TarGzBundle(String name, String version, String url) {
-		this.name = name;
-		this.url = url;
-		this.version = version;
-	}
-	
-	public String getName() {
-		return name;
-	}
+    public TarGzBundle(final String name, final String version, final String url) {
+        this.name = name;
+        this.url = url;
+        this.version = version;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    @Override
+    public String getName() {
+        return name;
+    }
 
-	public String getVersion() {
-		return version;
-	}
+    @Override
+    public String getUrl() {
+        return url;
+    }
 
-	public void setVersion(String version) {
-		this.version = version;
-	}
+    @Override
+    public String getVersion() {
+        return version;
+    }
 
-	public String getUrl() {
-		return url;
-	}
+    @Override
+    public void setName(final String name) {
+        this.name = name;
+    }
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
+    @Override
+    public void setUrl(final String url) {
+        this.url = url;
+    }
 
-	public String toString() {
-		StringBuilder b = new StringBuilder(this.name);
-		b.append("(").append(this.version).append("):");
-		return b.append(this.url).toString();
-	}
+    @Override
+    public void setVersion(final String version) {
+        this.version = version;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder b = new StringBuilder(name);
+        b.append("(").append(version).append("):");
+        return b.append(url).toString();
+    }
 }

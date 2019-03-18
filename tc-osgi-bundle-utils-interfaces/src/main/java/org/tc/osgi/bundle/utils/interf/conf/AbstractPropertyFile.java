@@ -13,77 +13,77 @@ import java.util.ResourceBundle;
  */
 public abstract class AbstractPropertyFile {
 
-	/**
-	 * String conf_directory.
-	 */
-	private String conf_directory;
+    /**
+     * String conf_directory.
+     */
+    private String conf_directory;
 
-	/**
-	 * ResourceBundle resourceBundle.
-	 */
-	private ResourceBundle resourceBundle = null;
+    /**
+     * ResourceBundle resourceBundle.
+     */
+    private ResourceBundle resourceBundle = null;
 
-	/**
-	 * String version.
-	 */
-	private String version = null;
+    /**
+     * String version.
+     */
+    private String version = null;
 
-	/**
-	 * AbstractPropertyFile constructor.
-	 * @param confFile String
-	 * @param loader ClassLoader
-	 */
-	protected AbstractPropertyFile(final String confFile, final ClassLoader loader) {
-		final File f = new File(".");
-		final String tmp = f.getAbsolutePath();
-		resourceBundle = ResourceBundle.getBundle(confFile, Locale.getDefault(), loader);
-	}
+    /**
+     * AbstractPropertyFile constructor.
+     * @param confFile String
+     * @param loader ClassLoader
+     */
+    protected AbstractPropertyFile(final String confFile, final ClassLoader loader) {
+        final File f = new File(".");
+        final String tmp = f.getAbsolutePath();
+        resourceBundle = ResourceBundle.getBundle(confFile, Locale.getDefault(), loader);
+    }
 
-	/**
-	 * getBundleRacine.
-	 * @return String
-	 */
-	public abstract String getBundleRacine();
+    /**
+     * getBundleRacine.
+     * @return String
+     */
+    public abstract String getBundleRacine();
 
-	/**
-	 * getConfFile.
-	 * @return String
-	 */
-	public abstract String getConfFile();
+    /**
+     * getConfFile.
+     * @return String
+     */
+    public abstract String getConfFile();
 
-	/**
-	 * getConfigDirectory.
-	 * @return String
-	 */
-	public String getConfigDirectory() {
-		if (conf_directory == null) {
-			conf_directory = resourceBundle.getString(getBundleRacine() + "conf_directory");
-		}
-		return conf_directory;
-	}
+    /**
+     * getConfigDirectory.
+     * @return String
+     */
+    public String getConfigDirectory() {
+        if (conf_directory == null) {
+            conf_directory = resourceBundle.getString(getBundleRacine() + "conf_directory");
+        }
+        return conf_directory;
+    }
 
-	/**
-	 * getResourceBundle.
-	 * @return ResourceBundle
-	 */
-	protected ResourceBundle getResourceBundle() {
-		return resourceBundle;
-	}
+    /**
+     * getResourceBundle.
+     * @return ResourceBundle
+     */
+    protected ResourceBundle getResourceBundle() {
+        return resourceBundle;
+    }
 
-	/**
-	 * getVersion.
-	 * @return String
-	 */
-	public String getVersion() {
-		if (version == null) {
-			version = resourceBundle.getString(getBundleRacine() + "version");
-		}
-		return version;
-	}
+    /**
+     * getVersion.
+     * @return String
+     */
+    public String getVersion() {
+        if (version == null) {
+            version = resourceBundle.getString(getBundleRacine() + "version");
+        }
+        return version;
+    }
 
-	/**
-	 * getXMLFile.
-	 * @return String
-	 */
-	public abstract String getXMLFile();
+    /**
+     * getXMLFile.
+     * @return String
+     */
+    public abstract String getXMLFile();
 }

@@ -20,42 +20,42 @@ import org.tc.osgi.bundle.utils.logger.LoggerGestionnary;
  */
 public abstract class AbstractRMIServer implements IRPCServer {
 
-	/**
-	 * Registry registre.
-	 */
-	private Registry registre = null;
+    /**
+     * Registry registre.
+     */
+    private Registry registre = null;
 
-	/**
-	 * @param signature String
-	 * @param obj Object
-	 * @throws RemoteException
-	 * @throws MalformedURLException
-	 * @throws UnknownHostException
-	 * @throws FieldTrackingAssignementException
-	 * @see org.tc.osgi.bundle.utils.rpc.IRPCServer#addObject(java.lang.String, java.lang.Object)
-	 */
-	@Override
-	public void addObject(final String signature, final Object obj) throws RemoteException, MalformedURLException, UnknownHostException,
-		FieldTrackingAssignementException {
-		final StringBuilder url = new StringBuilder("rmi://").append(InetAddress.getByName(getAddr()).getHostAddress());
-		url.append("/").append(signature);
-		LoggerGestionnary.getInstance(AbstractRMIServer.class).debug("Enregistrement de l'objet accessible a l'url : " + url);
-		if (obj instanceof Remote) {
-			registre.rebind(signature, (Remote) obj);
-		}
-	}
+    /**
+     * @param signature String
+     * @param obj Object
+     * @throws RemoteException
+     * @throws MalformedURLException
+     * @throws UnknownHostException
+     * @throws FieldTrackingAssignementException
+     * @see org.tc.osgi.bundle.utils.rpc.IRPCServer#addObject(java.lang.String, java.lang.Object)
+     */
+    @Override
+    public void addObject(final String signature, final Object obj) throws RemoteException, MalformedURLException, UnknownHostException,
+        FieldTrackingAssignementException {
+        final StringBuilder url = new StringBuilder("rmi://").append(InetAddress.getByName(getAddr()).getHostAddress());
+        url.append("/").append(signature);
+        LoggerGestionnary.getInstance(AbstractRMIServer.class).debug("Enregistrement de l'objet accessible a l'url : " + url);
+        if (obj instanceof Remote) {
+            registre.rebind(signature, (Remote) obj);
+        }
+    }
 
-	/**
-	 * createRegistry.
-	 * @param rmiPort String
-	 * @throws RemoteException
-	 * @throws FieldTrackingAssignementException
-	 */
-	protected void createRegistry(final String rmiPort) throws RemoteException, FieldTrackingAssignementException {
-		if (registre == null) {
-			LoggerGestionnary.getInstance(AbstractRMIServer.class).debug("Le registre RMI n'existant pas on en cree un");
-			registre = LocateRegistry.createRegistry(Integer.valueOf(rmiPort));
-		}
-		LoggerGestionnary.getInstance(AbstractRMIServer.class).debug("Ouverture du port RMI :" + rmiPort);
-	}
+    /**
+     * createRegistry.
+     * @param rmiPort String
+     * @throws RemoteException
+     * @throws FieldTrackingAssignementException
+     */
+    protected void createRegistry(final String rmiPort) throws RemoteException, FieldTrackingAssignementException {
+        if (registre == null) {
+            LoggerGestionnary.getInstance(AbstractRMIServer.class).debug("Le registre RMI n'existant pas on en cree un");
+            registre = LocateRegistry.createRegistry(Integer.valueOf(rmiPort));
+        }
+        LoggerGestionnary.getInstance(AbstractRMIServer.class).debug("Ouverture du port RMI :" + rmiPort);
+    }
 }

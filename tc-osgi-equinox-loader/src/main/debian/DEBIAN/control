@@ -3,8 +3,8 @@ Version: ${versiontimestamp}
 Section: base
 Priority: optional
 Architecture: all
-Optionnal: openjdk-8-jre | sun-java8-jre | openjdk-9-jre | sun-java9-jre  
-Depends: tc-osgi-bundle-utils-${utils.version}, tc-osgi-bundle-utils-interfaces-${utils.interfaces.version}
+Optionnal: openjdk-9-jre | sun-java9-jre | openjdk-11-jre | sun-java11-jre  
+Depends: tc-osgi-bundle-utils-${tc-osgi-bundle-utils.version}, tc-osgi-bundle-utils-interfaces-${tc-osgi-bundle-utils-interfaces.version}
 Maintainer: Collonville Thomas <collonville_tom@yahoo.fr>
 Homepage: <http://collonville.thomas.free.fr>
 Description: Conteneur applicatif osgi

@@ -20,7 +20,8 @@ public class UtilsObjectFactoryImpl extends ObjectFactory {
      * @param className String
      * @return ElementConfiguration
      */
-    public ElementConfiguration createElementConfiguration(final String defaultValue, final String valueType, final String fieldName, final String className) {
+    public ElementConfiguration createElementConfiguration(final String defaultValue, final String valueType, final String fieldName,
+        final String className) {
         final ElementConfiguration element = new ElementConfiguration();
         element.setClassName(className);
         element.setDefaultValue(defaultValue);

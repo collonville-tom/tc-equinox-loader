@@ -17,36 +17,36 @@ import junit.framework.Assert;
  */
 public class ObserverSubjectTest {
 
-	/**
-	 * testObserverSubject.
-	 */
-	@Test
-	public void testObserverSubject() {
+    /**
+     * testObserverSubject.
+     */
+    @Test
+    public void testObserverSubject() {
 
-		final AbstractSubject subject = new AbstractSubject() {};
-		final IObserverEvent event = new IObserverEvent() {};
+        final AbstractSubject subject = new AbstractSubject() {};
+        final IObserverEvent event = new IObserverEvent() {};
 
-		final IObserver observer = new IObserver() {
+        final IObserver observer = new IObserver() {
 
-			@Override
-			public void update(final ISubject _subject) {
-				Assert.assertEquals(subject, _subject);
+            @Override
+            public void update(final ISubject _subject) {
+                Assert.assertEquals(subject, _subject);
 
-			}
+            }
 
-			@Override
-			public void update(final ISubject _subject, final IObserverEvent _event) {
-				Assert.assertEquals(subject, _subject);
-				Assert.assertEquals(event, _event);
+            @Override
+            public void update(final ISubject _subject, final IObserverEvent _event) {
+                Assert.assertEquals(subject, _subject);
+                Assert.assertEquals(event, _event);
 
-			}
-		};
+            }
+        };
 
-		subject.addObserver(observer);
-		subject.notifyObservers(event);
-		subject.notifyObservers();
-		subject.toString();
-		subject.removeObserver(observer);
-	}
+        subject.addObserver(observer);
+        subject.notifyObservers(event);
+        subject.notifyObservers();
+        subject.toString();
+        subject.removeObserver(observer);
+    }
 
 }

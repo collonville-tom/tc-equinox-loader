@@ -20,9 +20,12 @@ import javax.xml.bind.annotation.XmlType;
 import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>
+ * Java class for anonymous complex type.
  *
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  *
  * <pre>
  * &lt;complexType>
@@ -38,6 +41,7 @@ import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementEx
  *
  *
  * ConfigurationLibrary.java.
+ * 
  * @author collonville thomas
  * @version 0.2.2
  * @track SDD_BUNDLE_UTILS_025
@@ -87,7 +91,8 @@ public class ConfigurationLibrary {
      * @return ElementConfiguration
      * @throws FieldTrackingAssignementException
      */
-    public ElementConfiguration getElement(final String _declaredField, final Class<? extends Object> class1) throws FieldTrackingAssignementException {
+    public ElementConfiguration getElement(final String _declaredField, final Class<? extends Object> class1)
+        throws FieldTrackingAssignementException {
         for (final ElementConfiguration element : configFiles) {
             if (class1.getCanonicalName().equals(element.getClassName()) && element.getFieldName().equals(_declaredField)) {
                 return element;

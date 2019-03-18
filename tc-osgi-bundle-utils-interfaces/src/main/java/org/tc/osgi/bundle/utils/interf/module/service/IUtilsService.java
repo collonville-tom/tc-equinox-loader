@@ -15,30 +15,30 @@ import org.tc.osgi.bundle.utils.interf.serial.ISerialTool;
  */
 public interface IUtilsService {
 
-	/**
-	 * getSerialTool.
-	 *
-	 * @return SerialTool<Serializable>
-	 */
-	public <T extends Serializable> ISerialTool<T> getSerialTool();
+    public boolean contains(Annotation[] annots, Class<?> ann);
 
-	public boolean contains(Annotation[] annots, Class<?> ann);
+    /**
+     * getSerialTool.
+     *
+     * @return SerialTool<Serializable>
+     */
+    public <T extends Serializable> ISerialTool<T> getSerialTool();
 
-	/**
-	 * list2String.
-	 *
-	 * @param chaines
-	 *            List<String>
-	 * @return String
-	 */
-	public String list2String(final List chaines, final String delimiter);
+    /**
+     * list2String.
+     *
+     * @param chaines
+     *            List<String>
+     * @return String
+     */
+    public String list2String(final List chaines, final String delimiter);
 
-	/**
-	 * list2String.
-	 * @param tab T[]
-	 * @param delimiter String
-	 * @return <T>
-	 */
-	public <T> String tab2String(final T[] tab, final String delimiter);
+    /**
+     * list2String.
+     * @param tab T[]
+     * @param delimiter String
+     * @return <T>
+     */
+    public <T> String tab2String(final T[] tab, final String delimiter);
 
 }

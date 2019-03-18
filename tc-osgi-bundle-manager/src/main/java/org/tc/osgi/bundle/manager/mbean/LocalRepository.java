@@ -14,39 +14,38 @@ import org.tc.osgi.bundle.manager.tools.RepoParser;
 
 public class LocalRepository extends AbstractRepository {
 
-	public LocalRepository(String name, String url) {
-		super(name, url);
-	}
+    public LocalRepository(final String name, final String url) {
+        super(name, url);
+    }
 
-	@Override
-	public void fetch() {
-		try {
-			List<Path> paths = Files.list(new File(this.getRepositoryUrl()+"/"+this.getRepositoryName()).toPath()).collect(Collectors.toList());
-			String file = ManagerPropertyFile.getInstance().getWorkDirectory() + "/"+this.getRepositoryName()+"/"
-					+ ManagerPropertyFile.getInstance().getStaticRepositoryFile();
-			FileWriter writer = new FileWriter(new File(file));
-			for (Path p : paths) {
-				if(!p.endsWith(ManagerPropertyFile.getInstance().getStaticRepositoryFile()))
-				{
-					writer.write(p.toString().replace("/var/equinox-loader-manager/local", "."));
-					writer.write("\n");
-				}
-			}
-			writer.close();
-			
-			RepoParser parseur=new RepoParser();
-			this.setBundles(parseur.parseRepoList(file));
-		} catch (Exception e) {
-			LoggerServiceProxy.getInstance().getLogger(LocalRepository.class)
-					.error("Erreur while fetching local repository", e);
-		}
+    @Override
+    public void fetch() {
+        try {
+            final List<Path> paths = Files.list(new File(getRepositoryUrl() + "/" + getRepositoryName()).toPath()).collect(Collectors
+                .toList());
+            final String file = ManagerPropertyFile.getInstance().getWorkDirectory() + "/" + getRepositoryName() + "/" + ManagerPropertyFile
+                .getInstance().getStaticRepositoryFile();
+            final FileWriter writer = new FileWriter(new File(file));
+            for (final Path p : paths) {
+                if (!p.endsWith(ManagerPropertyFile.getInstance().getStaticRepositoryFile())) {
+                    writer.write(p.toString().replace("/var/equinox-loader-manager/local", "."));
+                    writer.write("\n");
+                }
+            }
+            writer.close();
 
-	}
+            final RepoParser parseur = new RepoParser();
+            setBundles(parseur.parseRepoList(file));
+        } catch (final Exception e) {
+            LoggerServiceProxy.getInstance().getLogger(LocalRepository.class).error("Erreur while fetching local repository", e);
+        }
 
-	@Override
-	public void pull(String bundle, String version) {
-		// TODO Auto-generated method stub
+    }
 
-	}
+    @Override
+    public void pull(final String bundle, final String version) {
+        // TODO Auto-generated method stub
+
+    }
 
 }

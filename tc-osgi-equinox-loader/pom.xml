@@ -14,41 +14,33 @@
 	</parent>
 
 	<properties>
-		<build>0.3.0</build>
-		<utils.version>0.4.0</utils.version>
-		<utils.interfaces.version>0.2.0</utils.interfaces.version>
-		<!-- ca va pas cette gestion des snapshot -->
-		<snapshot.xml.delimiter>.</snapshot.xml.delimiter><!-- . -->
-		<snapshot.pom.delimiter>-</snapshot.pom.delimiter><!-- - -->
-		<snapshot>SNAPSHOT</snapshot> <!-- si vide alors les demlimiteur doivent l'etre aussi -->
-		<docker.latest>0.4.0</docker.latest>
-		<jmx.port>7001</jmx.port>
+		<equinox.class-path>./ ./bundles/ ./bundles/tc-osgi-bundle-utils-${tc-osgi-bundle-utils.version}${snapshot.pom.delimiter}${snapshot}-assembly.jar ./bundles/tc-osgi-bundle-utils-interfaces-${tc-osgi-bundle-utils-interfaces.version}${snapshot.pom.delimiter}${snapshot}-assembly.jar</equinox.class-path>
 	</properties>
-	<version>${build}${snapshot.pom.delimiter}${snapshot}</version>
+	<version>${tc-osgi-equinox-loader.version}${tc-osgi-equinox-loader.pom}${tc-osgi-equinox-loader.snapshot}</version>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.tc.osgi.bundle.utils</groupId>
 			<artifactId>tc-osgi-bundle-utils</artifactId>
-			<version>${utils.version}${snapshot.pom.delimiter}${snapshot}</version>
+			<version>${tc-osgi-bundle-utils.version}${tc-osgi-bundle-utils.pom}${tc-osgi-bundle-utils.snapshot}</version>
 			<classifier>assembly</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.tc.osgi.bundle.utils</groupId>
 			<artifactId>tc-osgi-bundle-utils-interfaces</artifactId>
-			<version>${utils.interfaces.version}${snapshot.pom.delimiter}${snapshot}</version>
+			<version>${tc-osgi-bundle-utils-interfaces.version}${tc-osgi-bundle-utils-interfaces.pom}${tc-osgi-bundle-utils-interfaces.snapshot}</version>
 			<classifier>assembly</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.tc.osgi.bundle.utils</groupId>
 			<artifactId>tc-osgi-bundle-utils</artifactId>
-			<version>${utils.version}${snapshot.pom.delimiter}${snapshot}</version>
+			<version>${tc-osgi-bundle-utils.version}${tc-osgi-bundle-utils.pom}${tc-osgi-bundle-utils.snapshot}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.tc.osgi.bundle.utils</groupId>
 			<artifactId>tc-osgi-bundle-utils-interfaces</artifactId>
-			<version>${utils.interfaces.version}${snapshot.pom.delimiter}${snapshot}</version>
+			<version>${tc-osgi-bundle-utils-interfaces.version}${tc-osgi-bundle-utils-interfaces.pom}${tc-osgi-bundle-utils-interfaces.snapshot}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -75,7 +67,7 @@
 							<classpathPrefix>./</classpathPrefix>
 						</manifest>
 						<manifestEntries>
-							<Class-Path>./ ./bundles/ ./bundles/tc-osgi-bundle-utils-${utils.version}${snapshot.pom.delimiter}${snapshot}-assembly.jar ./bundles/tc-osgi-bundle-utils-interfaces-${utils.interfaces.version}${snapshot.pom.delimiter}${snapshot}-assembly.jar</Class-Path>
+							<Class-Path>${equinox.class-path}</Class-Path>
 							<Main-Class>org.tc.osgi.equinox.loader.EquinoxLoaderMain</Main-Class>
 						</manifestEntries>
 					</archive>
@@ -97,10 +89,9 @@
 								<manifest>
 									<addClasspath>true</addClasspath>
 									<classpathPrefix>./</classpathPrefix>
-									<!-- <mainClass>org.tc.osgi.equinox.loader.EquinoxLoaderMain</mainClass> -->
 								</manifest>
 								<manifestEntries>
-									<Class-Path>./ ./bundles/ ./bundles/tc-osgi-bundle-utils-${utils.version}${snapshot.pom.delimiter}${snapshot}-assembly.jar ./bundles/tc-osgi-bundle-utils-interfaces-${utils.interfaces.version}${snapshot.pom.delimiter}${snapshot}-assembly.jar</Class-Path>
+									<Class-Path>${equinox.class-path}</Class-Path>
 									<Main-Class>org.tc.osgi.equinox.loader.EquinoxLoaderMain</Main-Class>
 								</manifestEntries>
 							</archive>
@@ -168,7 +159,7 @@
 							<images>
 								<image>
 									<build>
-										<from>${docker.login}/tc-osgi-bundle-utils:${docker.latest}</from>
+										<from>${docker.login}/tc-osgi-bundle-utils:${tc-osgi-bundle-utils.latest}</from>
 										<cmd>/opt/equinox-loader/docker.sh</cmd>
 										<ports>
 											<port>${jmx.port}</port>

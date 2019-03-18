@@ -14,30 +14,30 @@ import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementEx
  */
 public interface IRPCServer {
 
-	/**
-	 * addObject.
-	 * @param signature String
-	 * @param obj Object
-	 * @throws RemoteException
-	 * @throws MalformedURLException
-	 * @throws UnknownHostException
-	 * @throws FieldTrackingAssignementException
-	 */
-	public void addObject(final String signature, final Object obj) throws RemoteException, MalformedURLException, UnknownHostException,
-		FieldTrackingAssignementException;
+    /**
+     * addObject.
+     * @param signature String
+     * @param obj Object
+     * @throws RemoteException
+     * @throws MalformedURLException
+     * @throws UnknownHostException
+     * @throws FieldTrackingAssignementException
+     */
+    public void addObject(final String signature, final Object obj) throws RemoteException, MalformedURLException, UnknownHostException,
+        FieldTrackingAssignementException;
 
-	/**
-	 * getRmiAddr.
-	 * @return String
-	 * @throws FieldTrackingAssignementException
-	 */
-	public String getAddr() throws FieldTrackingAssignementException;
+    /**
+     * getRmiAddr.
+     * @return String
+     * @throws FieldTrackingAssignementException
+     */
+    public String getAddr() throws FieldTrackingAssignementException;
 
-	/**
-	 * getRmiPort.
-	 * @return String
-	 * @throws FieldTrackingAssignementException
-	 */
-	public String getPort() throws FieldTrackingAssignementException;
+    /**
+     * getRmiPort.
+     * @return String
+     * @throws FieldTrackingAssignementException
+     */
+    public String getPort() throws FieldTrackingAssignementException;
 
 }

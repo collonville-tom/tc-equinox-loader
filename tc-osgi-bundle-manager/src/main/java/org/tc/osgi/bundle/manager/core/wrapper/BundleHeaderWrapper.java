@@ -7,28 +7,28 @@ import java.util.Map;
 
 public class BundleHeaderWrapper {
 
-	private static final String BUNDLE_NAME="Bundle-Name";
-	
-	private Map<String, String> properties = new HashMap<>();
+    private static final String BUNDLE_NAME = "Bundle-Name";
 
-	public BundleHeaderWrapper(Dictionary<String, String> headers) {
+    private Map<String, String> properties = new HashMap<>();
 
-		this.buildProperties(headers);
-	}
+    public BundleHeaderWrapper(final Dictionary<String, String> headers) {
 
-	private void buildProperties(Dictionary<String, String> headers) {
-		Enumeration<String> it = headers.keys();
-		for (Enumeration<String> e = headers.keys(); e.hasMoreElements();) {
-			String key = e.nextElement();
-			properties.put(key, headers.get(key));
-		}
-	}
+        buildProperties(headers);
+    }
 
-	public Map<String, String> getProperties() {
-		return properties;
-	}
+    private void buildProperties(final Dictionary<String, String> headers) {
+        final Enumeration<String> it = headers.keys();
+        for (final Enumeration<String> e = headers.keys(); e.hasMoreElements();) {
+            final String key = e.nextElement();
+            properties.put(key, headers.get(key));
+        }
+    }
 
-	public void setProperties(Map<String, String> properties) {
-		this.properties = properties;
-	}
+    public Map<String, String> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(final Map<String, String> properties) {
+        this.properties = properties;
+    }
 }

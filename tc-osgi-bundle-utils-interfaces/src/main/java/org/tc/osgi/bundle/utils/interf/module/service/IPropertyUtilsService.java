@@ -12,14 +12,14 @@ import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementEx
  */
 public interface IPropertyUtilsService {
 
-	/**
-	 * getPropertyFile.
-	 *
-	 * @param propertyFileName
-	 *            String
-	 * @return PropertyFile
-	 * @throws FieldTrackingAssignementException
-	 */
-	public IXmlProperty getXMLPropertyFile(String propertyFileName) throws FieldTrackingAssignementException;
+    /**
+     * getPropertyFile.
+     *
+     * @param propertyFileName
+     *            String
+     * @return PropertyFile
+     * @throws FieldTrackingAssignementException
+     */
+    public IXmlProperty getXMLPropertyFile(String propertyFileName) throws FieldTrackingAssignementException;
 
 }

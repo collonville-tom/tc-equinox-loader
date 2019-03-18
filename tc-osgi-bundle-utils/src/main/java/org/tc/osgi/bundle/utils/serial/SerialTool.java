@@ -19,59 +19,61 @@ import org.tc.osgi.bundle.utils.interf.serial.ISerialTool;
  */
 public class SerialTool<T extends Serializable> implements ISerialTool<T> {
 
-	/**
-	 * SerialTool constructor.
-	 */
-	public SerialTool() {
-		super();
-	}
+    /**
+     * SerialTool constructor.
+     */
+    public SerialTool() {
+        super();
+    }
 
-	/**
-	 * read.
-	 *
-	 * @param name
-	 *            String
-	 * @param directory
-	 *            String
-	 * @return Object
-	 * @throws FileNotFoundException
-	 */
-	public T read(final String name, final String directory) throws FileNotFoundException {
+    /**
+     * read.
+     *
+     * @param name
+     *            String
+     * @param directory
+     *            String
+     * @return Object
+     * @throws FileNotFoundException
+     */
+    @Override
+    public T read(final String name, final String directory) throws FileNotFoundException {
 
-		XMLDecoder decoder;
-		decoder = new XMLDecoder(new FileInputStream(directory + name));
-		final T object = (T) decoder.readObject();
-		decoder.close();
-		return object;
+        XMLDecoder decoder;
+        decoder = new XMLDecoder(new FileInputStream(directory + name));
+        final T object = (T) decoder.readObject();
+        decoder.close();
+        return object;
 
-	}
+    }
 
-	/**
-	 * save.
-	 *
-	 * @param object
-	 *            Object
-	 * @param name
-	 *            String
-	 * @param directory
-	 *            String
-	 * @throws FileNotFoundException
-	 */
-	public void save(final T object, final String name, final String directory) throws FileNotFoundException {
-		XMLEncoder e;
-		e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(directory + name)));
-		e.writeObject(object);
-		e.close();
+    /**
+     * save.
+     *
+     * @param object
+     *            Object
+     * @param name
+     *            String
+     * @param directory
+     *            String
+     * @throws FileNotFoundException
+     */
+    @Override
+    public void save(final T object, final String name, final String directory) throws FileNotFoundException {
+        XMLEncoder e;
+        e = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(directory + name)));
+        e.writeObject(object);
+        e.close();
 
-	}
+    }
 
-	/**
-	 * @return String
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "SerialTools class";
-	}
+    /**
+     * @return String
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "SerialTools class";
+    }
 
 }

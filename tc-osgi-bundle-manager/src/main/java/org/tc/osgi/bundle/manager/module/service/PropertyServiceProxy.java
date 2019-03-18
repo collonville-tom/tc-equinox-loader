@@ -12,52 +12,52 @@ import org.tc.osgi.bundle.utils.interf.module.service.IPropertyUtilsService;
  */
 public class PropertyServiceProxy implements IPropertyUtilsService {
 
-	/**
-	 * UtilsServiceProxy instance.
-	 */
-	private static PropertyServiceProxy instance = null;
+    /**
+     * UtilsServiceProxy instance.
+     */
+    private static PropertyServiceProxy instance = null;
 
-	/**
-	 * getInstance.
-	 * @return UtilsServiceProxy
-	 */
-	public static PropertyServiceProxy getInstance() {
-		if (PropertyServiceProxy.instance == null) {
-			PropertyServiceProxy.instance = new PropertyServiceProxy();
-		}
-		return PropertyServiceProxy.instance;
-	}
+    /**
+     * getInstance.
+     * @return UtilsServiceProxy
+     */
+    public static PropertyServiceProxy getInstance() {
+        if (PropertyServiceProxy.instance == null) {
+            PropertyServiceProxy.instance = new PropertyServiceProxy();
+        }
+        return PropertyServiceProxy.instance;
+    }
 
-	/**
-	 * IUtilsService service.
-	 */
-	private IPropertyUtilsService service = null;
+    /**
+     * IUtilsService service.
+     */
+    private IPropertyUtilsService service = null;
 
-	/**
-	 * UtilsServiceProxy constructor.
-	 */
-	private PropertyServiceProxy() {
+    /**
+     * UtilsServiceProxy constructor.
+     */
+    private PropertyServiceProxy() {
 
-	}
+    }
 
-	/**
-	 * getService.
-	 * @return IUtilsService
-	 */
-	public IPropertyUtilsService getService() {
-		return service;
-	}
+    /**
+     * getService.
+     * @return IUtilsService
+     */
+    public IPropertyUtilsService getService() {
+        return service;
+    }
 
-	/**
-	 * setService.
-	 * @param service IUtilsService
-	 */
-	public void setService(final IPropertyUtilsService service) {
-		this.service = service;
-	}
+    @Override
+    public IXmlProperty getXMLPropertyFile(final String propertyFileName) throws FieldTrackingAssignementException {
+        return service.getXMLPropertyFile(propertyFileName);
+    }
 
-	@Override
-	public IXmlProperty getXMLPropertyFile(String propertyFileName) throws FieldTrackingAssignementException {
-		return service.getXMLPropertyFile(propertyFileName);
-	}
+    /**
+     * setService.
+     * @param service IUtilsService
+     */
+    public void setService(final IPropertyUtilsService service) {
+        this.service = service;
+    }
 }

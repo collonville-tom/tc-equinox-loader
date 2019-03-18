@@ -16,22 +16,22 @@ import org.junit.Test;
  */
 public class StringBufferOutputStreamTest {
 
-	/**
-	 * test.
-	 */
-	@Test
-	public void test() {
-		final StringBufferOutputStream s = new StringBufferOutputStream();
-		try {
-			s.write(42);
-			s.write(42);
-			s.write(42);
-			s.write(42);
-			Assert.assertEquals("****", s.toString());
-		} catch (final IOException e) {
-			Assert.fail(e.getMessage());
-		}
+    /**
+     * test.
+     */
+    @Test
+    public void test() {
+        final StringBufferOutputStream s = new StringBufferOutputStream();
+        try {
+            s.write(42);
+            s.write(42);
+            s.write(42);
+            s.write(42);
+            Assert.assertEquals("****", s.toString());
+        } catch (final IOException e) {
+            Assert.fail(e.getMessage());
+        }
 
-	}
+    }
 
 }

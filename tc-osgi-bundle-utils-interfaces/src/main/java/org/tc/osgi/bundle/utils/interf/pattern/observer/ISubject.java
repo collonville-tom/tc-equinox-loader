@@ -11,43 +11,43 @@ import java.util.List;
  */
 public interface ISubject<T extends IObserver, N extends IObserverEvent> {
 
-	/**
-	 * addObserver.
-	 *
-	 * @param _observer
-	 *            IObserver
-	 * @return boolean
-	 */
-	public boolean addObserver(T _observer);
+    /**
+     * addObserver.
+     *
+     * @param _observer
+     *            IObserver
+     * @return boolean
+     */
+    public boolean addObserver(T _observer);
 
-	/**
-	 * @return boolean
-	 */
-	public boolean notifyObservers();
+    /**
+     * @return boolean
+     */
+    public boolean notifyObservers();
 
-	/**
-	 * notifyObservers.
-	 *
-	 * @param _event
-	 *            IObserverEvent
-	 * @return boolean
-	 */
-	public boolean notifyObservers(N _event);
+    /**
+     * notifyObservers.
+     *
+     * @param _events
+     *            List<IObserverEvent>
+     */
+    void notifyObservers(List<N> _events);
 
-	/**
-	 * notifyObservers.
-	 *
-	 * @param _events
-	 *            List<IObserverEvent>
-	 */
-	void notifyObservers(List<N> _events);
+    /**
+     * notifyObservers.
+     *
+     * @param _event
+     *            IObserverEvent
+     * @return boolean
+     */
+    public boolean notifyObservers(N _event);
 
-	/**
-	 * removeObserver.
-	 *
-	 * @param _observer
-	 *            IObserver
-	 * @return boolean
-	 */
-	public boolean removeObserver(T _observer);
+    /**
+     * removeObserver.
+     *
+     * @param _observer
+     *            IObserver
+     * @return boolean
+     */
+    public boolean removeObserver(T _observer);
 }

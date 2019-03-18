@@ -10,6 +10,7 @@ import org.mockito.Mockito;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
+import org.tc.osgi.bundle.utils.interf.context.IBundleCommand;
 
 import junit.framework.Assert;
 
@@ -30,9 +31,9 @@ public class BundleKillerTest {
         final String bundleName = "mockBundle";
         final String version = "versionBundle";
 
-        Dictionary<String,String> d=new Headers<String,String>(1);
-        d.put(BundleStarter.VERSION_H, version);
-        
+        final Dictionary<String, String> d = new Headers<String, String>(1);
+        d.put(IBundleCommand.VERSION_H, version);
+
         final Bundle mockbundle = Mockito.mock(Bundle.class);
         Mockito.when(mockbundle.getSymbolicName()).thenReturn(bundleName);
         final Bundle[] bundles = { mockbundle };
@@ -42,7 +43,7 @@ public class BundleKillerTest {
 
         final BundleKiller killer = new BundleKiller();
         try {
-            killer.stopBundle(context, bundleName,version);
+            killer.stopBundle(context, bundleName, version);
             Mockito.verify(mockbundle, Mockito.times(1)).stop();
         } catch (final BundleException e) {
             Assert.fail(e.getMessage());

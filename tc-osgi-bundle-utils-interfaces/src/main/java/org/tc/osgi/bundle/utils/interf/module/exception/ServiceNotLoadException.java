@@ -11,30 +11,30 @@ import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
  */
 public class ServiceNotLoadException extends TcOsgiException {
 
-	/**
-	 * long serialVersionUID.
-	 */
-	private static final long serialVersionUID = -447934465551330931L;
+    /**
+     * long serialVersionUID.
+     */
+    private static final long serialVersionUID = -447934465551330931L;
 
-	/**
-	 * UtilsException constructor.
-	 *
-	 * @param _message
-	 *            String
-	 */
-	public ServiceNotLoadException(final String _message) {
-		super(_message);
-	}
+    /**
+     * UtilsException constructor.
+     *
+     * @param _message
+     *            String
+     */
+    public ServiceNotLoadException(final String _message) {
+        super(_message);
+    }
 
-	/**
-	 * UtilsException constructor.
-	 *
-	 * @param _message
-	 *            String
-	 * @param _e
-	 *            Throwable
-	 */
-	public ServiceNotLoadException(final String _message, final Throwable _e) {
-		super(_message, _e);
-	}
+    /**
+     * UtilsException constructor.
+     *
+     * @param _message
+     *            String
+     * @param _e
+     *            Throwable
+     */
+    public ServiceNotLoadException(final String _message, final Throwable _e) {
+        super(_message, _e);
+    }
 }

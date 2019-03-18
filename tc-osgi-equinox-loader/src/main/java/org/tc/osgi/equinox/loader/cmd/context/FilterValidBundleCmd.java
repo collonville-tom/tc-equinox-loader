@@ -57,12 +57,13 @@ public class FilterValidBundleCmd extends AbstractBundleContextCmd {
                     LoggerGestionnary.getInstance(FilterValidBundleCmd.class).debug("Uninstall invalid bundle:" + bundle.toString());
                     bundle.uninstall();
                 }
-//                else {
-//                    if (!bundle.toString().startsWith("log4j")) {
-//                        LoggerGestionnary.getInstance(FilterValidBundleCmd.class).debug("Refresh bundle:" + bundle.toString());
-//                        bundle.update();
-//                    }
-//                }
+                // else {
+                // if (!bundle.toString().startsWith("log4j")) {
+                // LoggerGestionnary.getInstance(FilterValidBundleCmd.class).debug("Refresh
+                // bundle:" + bundle.toString());
+                // bundle.update();
+                // }
+                // }
             }
         } catch (final BundleException e) {
             LoggerGestionnary.getInstance(FilterValidBundleCmd.class).error(e);
@@ -95,8 +96,8 @@ public class FilterValidBundleCmd extends AbstractBundleContextCmd {
             @Override
             public boolean evaluate(final Bundle e) {
                 try {
-                    if ((e.getSymbolicName() != null)
-                        && e.getSymbolicName().matches(FilterValidBundleCmd.this.getUtilsDependencyBundleName())) {
+                    if ((e.getSymbolicName() != null) && e.getSymbolicName().matches(FilterValidBundleCmd.this
+                        .getUtilsDependencyBundleName())) {
                         LoggerGestionnary.getInstance(this.getClass()).debug("Refresh auto du bundle :" + e.getSymbolicName());
                         e.update();
                         return true;

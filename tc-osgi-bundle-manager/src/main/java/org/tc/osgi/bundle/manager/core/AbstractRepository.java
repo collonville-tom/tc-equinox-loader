@@ -6,53 +6,50 @@ import java.util.List;
 import org.tc.osgi.bundle.manager.core.bundle.ITarGzBundle;
 import org.tc.osgi.bundle.manager.mbean.RepositoryMBean;
 
-public abstract class AbstractRepository implements RepositoryMBean{
+public abstract class AbstractRepository implements RepositoryMBean {
 
-	private String repositoryName;
-	private String repositoryUrl;
-	
-	private List<ITarGzBundle> bundles=new ArrayList<>();
-	
-	protected AbstractRepository(String name,String url)
-	{
-		this.repositoryName=name;
-		this.repositoryUrl=url;
-	}
-	
-	
-	public String getRepositoryName() {
-		return repositoryName;
-	}
+    private List<ITarGzBundle> bundles = new ArrayList<>();
+    private String repositoryName;
 
+    private String repositoryUrl;
 
+    protected AbstractRepository(final String name, final String url) {
+        repositoryName = name;
+        repositoryUrl = url;
+    }
 
-	public void setRepositoryName(String repositoryName) {
-		this.repositoryName = repositoryName;
-	}
+    @Override
+    public abstract void fetch();
 
+    @Override
+    public List<ITarGzBundle> getBundles() {
+        return bundles;
+    }
 
+    @Override
+    public String getRepositoryName() {
+        return repositoryName;
+    }
 
-	public String getRepositoryUrl() {
-		return repositoryUrl;
-	}
+    @Override
+    public String getRepositoryUrl() {
+        return repositoryUrl;
+    }
 
+    @Override
+    public abstract void pull(String bundle, String version);
 
+    public void setBundles(final List<ITarGzBundle> bundles) {
+        this.bundles = bundles;
+    }
 
-	public void setRepositoryUrl(String repositoryUrl) {
-		this.repositoryUrl = repositoryUrl;
-	}
+    @Override
+    public void setRepositoryName(final String repositoryName) {
+        this.repositoryName = repositoryName;
+    }
 
-
-	public List<ITarGzBundle> getBundles() {
-		return bundles;
-	}
-
-
-	public void setBundles(List<ITarGzBundle> bundles) {
-		this.bundles = bundles;
-	}
-	
-	
-	public abstract void fetch();
-	public abstract void pull(String bundle,String version);
+    @Override
+    public void setRepositoryUrl(final String repositoryUrl) {
+        this.repositoryUrl = repositoryUrl;
+    }
 }

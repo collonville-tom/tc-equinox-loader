@@ -10,46 +10,44 @@ import org.osgi.framework.ServiceReference;
 
 public class ServiceWrapper {
 
-	private Map<String,Object> serviceProperties = new HashMap<>();
-	private List<BundleWrapper> bWrapper = new ArrayList<>();
-	
-	
+    private List<BundleWrapper> bWrapper = new ArrayList<>();
+    private Map<String, Object> serviceProperties = new HashMap<>();
 
-	public ServiceWrapper(ServiceReference<?> service) {
+    public ServiceWrapper(final ServiceReference<?> service) {
 
-		String[] ss = service.getPropertyKeys();
-		if (ss != null) {
-			for (String s : ss) {
-				//LoggerGestionnary.getInstance(ServiceWrapper.class).debug("analyse des propriété du service " + s);
-				this.serviceProperties.put(s,service.getProperty(s));
-			}
-		}
-		Bundle[] bs = service.getUsingBundles();
-		if (bs != null) {
-			for (Bundle b : bs) {
-				//LoggerGestionnary.getInstance(ServiceWrapper.class).debug("analyse des bundles associés au service: " + b.getSymbolicName());
-				bWrapper.add(new BundleWrapper(b));
-			}
-		}
+        final String[] ss = service.getPropertyKeys();
+        if (ss != null) {
+            for (final String s : ss) {
+                // LoggerGestionnary.getInstance(ServiceWrapper.class).debug("analyse
+                // des propriété du service " + s);
+                serviceProperties.put(s, service.getProperty(s));
+            }
+        }
+        final Bundle[] bs = service.getUsingBundles();
+        if (bs != null) {
+            for (final Bundle b : bs) {
+                // LoggerGestionnary.getInstance(ServiceWrapper.class).debug("analyse
+                // des bundles associés au service: " + b.getSymbolicName());
+                bWrapper.add(new BundleWrapper(b));
+            }
+        }
 
-	}
+    }
 
-	public List<BundleWrapper> getbWrapper() {
-		return bWrapper;
-	}
+    public List<BundleWrapper> getbWrapper() {
+        return bWrapper;
+    }
 
-	public void setbWrapper(List<BundleWrapper> bWrapper) {
-		this.bWrapper = bWrapper;
-	}
+    public Map<String, Object> getServiceProperties() {
+        return serviceProperties;
+    }
 
-	public Map<String, Object> getServiceProperties() {
-		return serviceProperties;
-	}
+    public void setbWrapper(final List<BundleWrapper> bWrapper) {
+        this.bWrapper = bWrapper;
+    }
 
-	public void setServiceProperties(Map<String, Object> serviceProperties) {
-		this.serviceProperties = serviceProperties;
-	}
-
-
+    public void setServiceProperties(final Map<String, Object> serviceProperties) {
+        this.serviceProperties = serviceProperties;
+    }
 
 }

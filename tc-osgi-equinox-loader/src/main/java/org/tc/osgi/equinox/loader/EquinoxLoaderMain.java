@@ -45,18 +45,21 @@ public final class EquinoxLoaderMain {
     public static void main(final String[] _args) {
 
         try {
-            LoggerGestionnary.getInstance(EquinoxLoaderMain.class).info("EquinoxStarter-" + EquinoxPropertyFile.getInstance().getVersion() + " start");
+            LoggerGestionnary.getInstance(EquinoxLoaderMain.class).info("EquinoxStarter-" + EquinoxPropertyFile.getInstance().getVersion()
+                + " start");
             EquinoxStarter.getInstance().compileParameters();
             if (_args.length == 0) {
                 LoggerGestionnary.getInstance(EquinoxStarter.class).info("Lancement de l'applicatif sans parametres");
                 EquinoxStarter.getInstance().start();
             } else {
-                LoggerGestionnary.getInstance(EquinoxStarter.class).info("Lancement de l'applicatif avec " + UtilsServiceImpl.getInstance().tab2String(_args, ","));
+                LoggerGestionnary.getInstance(EquinoxStarter.class).info("Lancement de l'applicatif avec " + UtilsServiceImpl.getInstance()
+                    .tab2String(_args, ","));
                 EquinoxStarter.getInstance().start(_args);
             }
-            EquinoxLoaderRMIServer.getInstance().addObject(IEquinoxLoaderBundleContext.class.getSimpleName(), new EquinoxLoaderBundleContextImpl());
+            EquinoxLoaderRMIServer.getInstance().addObject(IEquinoxLoaderBundleContext.class.getSimpleName(),
+                new EquinoxLoaderBundleContextImpl());
             if (EquinoxStarter.getInstance().check()) {
-            	LoggerGestionnary.getInstance(EquinoxLoaderMain.class).debug("####################");
+                LoggerGestionnary.getInstance(EquinoxLoaderMain.class).debug("####################");
                 LoggerGestionnary.getInstance(EquinoxLoaderMain.class).debug("LoadDefaultBundleCmd");
                 LoggerGestionnary.getInstance(EquinoxLoaderMain.class).debug("####################");
                 new LoadDefaultBundleCmd(EquinoxStarter.getInstance().getContext()).execute();

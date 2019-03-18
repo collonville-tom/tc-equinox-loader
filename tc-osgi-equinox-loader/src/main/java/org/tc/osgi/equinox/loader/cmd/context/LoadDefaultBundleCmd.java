@@ -38,7 +38,7 @@ public class LoadDefaultBundleCmd extends AbstractBundleContextCmd {
     @Override
     public void execute() throws EquinoxCmdException {
         try {
-            this.loadDefaultBundles();
+            loadDefaultBundles();
         } catch (final FieldTrackingAssignementException e) {
             throw new EquinoxCmdException("Error cmd", e);
         } catch (final EquinoxConfigException e) {
@@ -58,7 +58,7 @@ public class LoadDefaultBundleCmd extends AbstractBundleContextCmd {
         final File bundleDirectory = new File(EquinoxPropertyFile.getInstance().getBundleDirectory());
         final File conflicBundleDirectory = new File(EquinoxPropertyFile.getInstance().getBundleDirectory() + "/conflic");
         final List<File> listofFiles = new ArrayList<File>();
-        BundleFilterUtils filter=new BundleFilterUtils();
+        final BundleFilterUtils filter = new BundleFilterUtils();
         for (final File f : bundleDirectory.listFiles()) {
             if (filter.isJar(f)) {
                 listofFiles.add(f);
@@ -71,12 +71,12 @@ public class LoadDefaultBundleCmd extends AbstractBundleContextCmd {
                 }
             }
         }
-        if (this.context != null) {
+        if (context != null) {
             LoggerGestionnary.getInstance(LoadDefaultBundleCmd.class).error("Le context bundle n'a pas ete correctement construit");
 
-            final Collection<File> files = filter.filterFile2Install(listofFiles, this.context.getBundles());
+            final Collection<File> files = filter.filterFile2Install(listofFiles, context.getBundles());
             for (final File f : files) {
-                new InstallBundleCmd(this.context, f.getAbsolutePath()).execute();
+                new InstallBundleCmd(context, f.getAbsolutePath()).execute();
             }
         }
     }

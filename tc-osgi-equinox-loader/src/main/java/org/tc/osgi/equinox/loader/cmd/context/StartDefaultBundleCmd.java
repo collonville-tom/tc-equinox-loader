@@ -17,12 +17,12 @@ import org.tc.osgi.equinox.loader.conf.exception.EquinoxConfigException;
  */
 public class StartDefaultBundleCmd extends AbstractBundleContextCmd {
 
+    private String managerDependencyBundleName;
+    private String managerDependencyBundleVersion;
+
     private String utilsDependencyBundleName;
     private String utilsDependencyBundleVersion;
 
-    private String managerDependencyBundleName;
-    private String managerDependencyBundleVersion;
-    
     /**
      * StartDefaultBundleCmd constructor.
      * @param context BundleContext
@@ -38,47 +38,50 @@ public class StartDefaultBundleCmd extends AbstractBundleContextCmd {
     @Override
     public void execute() throws EquinoxCmdException {
         try {
-            new BundleStarter().processOnBundle(this.context, this.getUtilsDependencyBundleName(),this.getUtilsDependencyBundleVersion());
+            new BundleStarter().processOnBundle(context, getUtilsDependencyBundleName(), getUtilsDependencyBundleVersion());
 
-        } catch (TcOsgiException e) {
+        } catch (final TcOsgiException e) {
             throw new EquinoxCmdException(e.getMessage(), e);
         }
-      
+
         try {
-            new BundleStarter().processOnBundle(this.context, this.getManagerDependencyBundleName(),this.getManagerDependencyBundleVersion());
+            new BundleStarter().processOnBundle(context, getManagerDependencyBundleName(), getManagerDependencyBundleVersion());
 
-        } catch (TcOsgiException e) {
-            LoggerGestionnary.getInstance(StartDefaultBundleCmd.class).error(
-                "Lancement auto du bundle echoué :" + this.managerDependencyBundleName + " ce dernier est peut etre simplement absent", e);
+        } catch (final TcOsgiException e) {
+            LoggerGestionnary.getInstance(StartDefaultBundleCmd.class).error("Lancement auto du bundle echoué :"
+                + managerDependencyBundleName + " ce dernier est peut etre simplement absent", e);
         }
 
     }
-    public String getUtilsDependencyBundleName() throws FieldTrackingAssignementException, EquinoxConfigException, EquinoxCmdException {
-        if (this.utilsDependencyBundleName == null) {
-            XMLPropertyFile.getInstance(EquinoxPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "utilsDependencyBundleName");
-        }
-        return this.utilsDependencyBundleName;
-    }
-    
+
     public String getManagerDependencyBundleName() throws FieldTrackingAssignementException, EquinoxConfigException, EquinoxCmdException {
-        if (this.managerDependencyBundleName == null) {
+        if (managerDependencyBundleName == null) {
             XMLPropertyFile.getInstance(EquinoxPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "managerDependencyBundleName");
         }
-        return this.managerDependencyBundleName;
+        return managerDependencyBundleName;
     }
-    
+
+    public String getManagerDependencyBundleVersion() throws FieldTrackingAssignementException, EquinoxConfigException,
+        EquinoxCmdException {
+        if (managerDependencyBundleVersion == null) {
+            XMLPropertyFile.getInstance(EquinoxPropertyFile.getInstance().getXMLFile()).fieldTraking(this,
+                "managerDependencyBundleVersion");
+        }
+        return managerDependencyBundleVersion;
+    }
+
+    public String getUtilsDependencyBundleName() throws FieldTrackingAssignementException, EquinoxConfigException, EquinoxCmdException {
+        if (utilsDependencyBundleName == null) {
+            XMLPropertyFile.getInstance(EquinoxPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "utilsDependencyBundleName");
+        }
+        return utilsDependencyBundleName;
+    }
+
     public String getUtilsDependencyBundleVersion() throws FieldTrackingAssignementException, EquinoxConfigException, EquinoxCmdException {
-        if (this.utilsDependencyBundleVersion == null) {
+        if (utilsDependencyBundleVersion == null) {
             XMLPropertyFile.getInstance(EquinoxPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "utilsDependencyBundleVersion");
         }
-        return this.utilsDependencyBundleVersion;
-    }
-    
-    public String getManagerDependencyBundleVersion() throws FieldTrackingAssignementException, EquinoxConfigException, EquinoxCmdException {
-        if (this.managerDependencyBundleVersion == null) {
-            XMLPropertyFile.getInstance(EquinoxPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "managerDependencyBundleVersion");
-        }
-        return this.managerDependencyBundleVersion;
+        return utilsDependencyBundleVersion;
     }
 
 }

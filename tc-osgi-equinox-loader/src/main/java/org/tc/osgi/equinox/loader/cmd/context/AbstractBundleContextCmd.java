@@ -11,8 +11,6 @@ import org.tc.osgi.equinox.loader.cmd.AbstractEquinoxCmd;
  */
 public abstract class AbstractBundleContextCmd<T> extends AbstractEquinoxCmd<T> {
 
- 
-
     /**
      * BundleContext context.
      */
@@ -28,5 +26,4 @@ public abstract class AbstractBundleContextCmd<T> extends AbstractEquinoxCmd<T> 
         this.context = context;
     }
 
-    
 }

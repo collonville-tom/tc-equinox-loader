@@ -29,7 +29,8 @@ public class UtilsObjectFactoryImplTest {
     @Test
     public void test() {
         final UtilsObjectFactoryImpl fac = new UtilsObjectFactoryImpl();
-        final ElementConfiguration el = fac.createElementConfiguration("defaultValue", String.class.getCanonicalName(), "value", UtilsObjectFactoryImplTest.class.getCanonicalName());
+        final ElementConfiguration el = fac.createElementConfiguration("defaultValue", String.class.getCanonicalName(), "value",
+            UtilsObjectFactoryImplTest.class.getCanonicalName());
         Assert.assertEquals("defaultValue", el.getDefaultValue());
         Assert.assertEquals("java.lang.String", el.getValueType());
         Assert.assertEquals("value", el.getFieldName());

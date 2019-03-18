@@ -7,51 +7,53 @@ import org.tc.osgi.bundle.utils.logger.LoggerGestionnary;
 
 public class TcOsgiServiceFactory<T> implements ServiceFactory {
 
-	/**
-	* int usageCounter.
-	*/
-	private int usageCounter = 0;
+    private final T instance;
 
-	private T instance;
+    /**
+    * int usageCounter.
+    */
+    private int usageCounter = 0;
 
-	public TcOsgiServiceFactory(T instance) {
-		super();
-		this.instance = instance;
-	}
+    public TcOsgiServiceFactory(final T instance) {
+        super();
+        this.instance = instance;
+    }
 
-	/**
-	 * @param bundle
-	 *            Bundle
-	 * @param registration
-	 *            ServiceRegistration
-	 * @return Object
-	 * @see org.osgi.framework.ServiceFactory#getService(org.osgi.framework.Bundle,
-	 *      org.osgi.framework.ServiceRegistration)
-	 */
-	@Override
-	public Object getService(final Bundle bundle, final ServiceRegistration registration) {
-		if (LoggerGestionnary.getInstance(TcOsgiServiceFactory.class) != null)
-			LoggerGestionnary.getInstance(TcOsgiServiceFactory.class).debug("Get TCServiceFactory for " + bundle.getSymbolicName());
-		usageCounter++;
-		if (LoggerGestionnary.getInstance(TcOsgiServiceFactory.class) != null)
-			LoggerGestionnary.getInstance(TcOsgiServiceFactory.class).debug("Number of bundles using service " + usageCounter);
-		return instance;
-	}
+    /**
+     * @param bundle
+     *            Bundle
+     * @param registration
+     *            ServiceRegistration
+     * @return Object
+     * @see org.osgi.framework.ServiceFactory#getService(org.osgi.framework.Bundle,
+     *      org.osgi.framework.ServiceRegistration)
+     */
+    @Override
+    public Object getService(final Bundle bundle, final ServiceRegistration registration) {
+        if (LoggerGestionnary.getInstance(TcOsgiServiceFactory.class) != null) {
+            LoggerGestionnary.getInstance(TcOsgiServiceFactory.class).debug("Get TCServiceFactory for " + bundle.getSymbolicName());
+        }
+        usageCounter++;
+        if (LoggerGestionnary.getInstance(TcOsgiServiceFactory.class) != null) {
+            LoggerGestionnary.getInstance(TcOsgiServiceFactory.class).debug("Number of bundles using service " + usageCounter);
+        }
+        return instance;
+    }
 
-	/**
-	 * @param bundle
-	 *            Bundle
-	 * @param registration
-	 *            ServiceRegistration
-	 * @param service
-	 *            Object
-	 * @see org.osgi.framework.ServiceFactory#ungetService(org.osgi.framework.Bundle,
-	 *      org.osgi.framework.ServiceRegistration, java.lang.Object)
-	 */
-	@Override
-	public void ungetService(final Bundle bundle, final ServiceRegistration registration, final Object service) {
-		LoggerGestionnary.getInstance(TcOsgiServiceFactory.class).debug("Release TCServiceFactory for " + bundle.getSymbolicName());
-		usageCounter--;
-		LoggerGestionnary.getInstance(TcOsgiServiceFactory.class).debug("Number of bundles using service " + usageCounter);
-	}
+    /**
+     * @param bundle
+     *            Bundle
+     * @param registration
+     *            ServiceRegistration
+     * @param service
+     *            Object
+     * @see org.osgi.framework.ServiceFactory#ungetService(org.osgi.framework.Bundle,
+     *      org.osgi.framework.ServiceRegistration, java.lang.Object)
+     */
+    @Override
+    public void ungetService(final Bundle bundle, final ServiceRegistration registration, final Object service) {
+        LoggerGestionnary.getInstance(TcOsgiServiceFactory.class).debug("Release TCServiceFactory for " + bundle.getSymbolicName());
+        usageCounter--;
+        LoggerGestionnary.getInstance(TcOsgiServiceFactory.class).debug("Number of bundles using service " + usageCounter);
+    }
 }

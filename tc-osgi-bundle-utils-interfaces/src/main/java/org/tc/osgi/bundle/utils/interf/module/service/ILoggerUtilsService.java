@@ -12,17 +12,17 @@ import org.tc.osgi.bundle.utils.interf.logger.ILoggerGestionnary;
  */
 public interface ILoggerUtilsService {
 
-	/**
-	 * getLogger.
-	 *
-	 * @return Logger
-	 */
-	public Logger getLogger(Class _class);
+    /**
+     * getLogger.
+     *
+     * @return Logger
+     */
+    public Logger getLogger(Class _class);
 
-	/**
-	 * getLoggerGestionnary.
-	 * @return LoggerGestionnary
-	 */
-	public ILoggerGestionnary getLoggerGestionnary();
+    /**
+     * getLoggerGestionnary.
+     * @return LoggerGestionnary
+     */
+    public ILoggerGestionnary getLoggerGestionnary();
 
 }

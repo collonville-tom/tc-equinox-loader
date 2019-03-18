@@ -28,11 +28,6 @@ import org.tc.osgi.bundle.utils.rmi.server.AbstractRMIServer;
 public class RMITest extends AbstractRMIServer implements Serializable {
 
     /**
-     * long serialVersionUID.
-     */
-    private static final long serialVersionUID = 7618385526881078970L;
-
-    /**
      * RMITest.java.
      */
     public interface Bidon extends Remote, Serializable {
@@ -85,6 +80,11 @@ public class RMITest extends AbstractRMIServer implements Serializable {
     }
 
     /**
+     * long serialVersionUID.
+     */
+    private static final long serialVersionUID = 7618385526881078970L;
+
+    /**
      * RMITest constructor.
      */
     public RMITest() {
@@ -126,7 +126,8 @@ public class RMITest extends AbstractRMIServer implements Serializable {
             testRmi.addObject(Bidon.class.getSimpleName(), b);
 
             final StringBuilder buff = new StringBuilder("rmi://");
-            buff.append(InetAddress.getByName(testRmi.getAddr()).getHostAddress()).append(":").append(testRmi.getPort()).append("/").append(Bidon.class.getSimpleName());
+            buff.append(InetAddress.getByName(testRmi.getAddr()).getHostAddress()).append(":").append(testRmi.getPort()).append("/").append(
+                Bidon.class.getSimpleName());
             System.out.println(buff.toString());
             final Remote rem = Naming.lookup(buff.toString());
             if (rem instanceof Bidon) {

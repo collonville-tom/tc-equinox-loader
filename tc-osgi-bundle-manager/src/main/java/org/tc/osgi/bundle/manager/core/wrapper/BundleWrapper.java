@@ -4,86 +4,82 @@ import org.osgi.framework.Bundle;
 
 public class BundleWrapper {
 
-	private long bundleId;
-	private String symbolicName;
-	private int state;
-	private String stateSignification;
-	private String location;
-	private int majorVersion;
-	private int minorVersion;
-	
+    private long bundleId;
+    private String location;
+    private int majorVersion;
+    private int minorVersion;
+    private int state;
+    private String stateSignification;
+    private String symbolicName;
 
-	public BundleWrapper(Bundle bundle)
-	{
-		this.wrap(bundle);
-	}
+    public BundleWrapper(final Bundle bundle) {
+        wrap(bundle);
+    }
 
-	private void wrap(Bundle bundle) {
-		this.bundleId=bundle.getBundleId();
-		this.symbolicName=bundle.getSymbolicName();
-		this.state=bundle.getState();
-		this.stateSignification=BundleStateEnum.detect(this.state).toString();
-		this.location=bundle.getLocation();
-		this.majorVersion=bundle.getVersion().getMajor();
-		this.minorVersion=bundle.getVersion().getMinor();
-	}
+    public long getBundleId() {
+        return bundleId;
+    }
 
-	
+    public String getLocation() {
+        return location;
+    }
 
-	public String getStateSignification() {
-		return stateSignification;
-	}
+    public int getMajorVersion() {
+        return majorVersion;
+    }
 
-	public void setStateSignification(String stateSignification) {
-		this.stateSignification = stateSignification;
-	}
+    public int getMinorVersion() {
+        return minorVersion;
+    }
 
-	public long getBundleId() {
-		return bundleId;
-	}
+    public int getState() {
+        return state;
+    }
 
-	public void setBundleId(long bundleId) {
-		this.bundleId = bundleId;
-	}
+    public String getStateSignification() {
+        return stateSignification;
+    }
 
-	public String getSymbolicName() {
-		return symbolicName;
-	}
+    public String getSymbolicName() {
+        return symbolicName;
+    }
 
-	public void setSymbolicName(String symbolicName) {
-		this.symbolicName = symbolicName;
-	}
+    public void setBundleId(final long bundleId) {
+        this.bundleId = bundleId;
+    }
 
-	public int getState() {
-		return state;
-	}
+    public void setLocation(final String location) {
+        this.location = location;
+    }
 
-	public void setState(int state) {
-		this.state = state;
-	}
+    public void setMajorVersion(final int majorVersion) {
+        this.majorVersion = majorVersion;
+    }
 
-	public String getLocation() {
-		return location;
-	}
+    public void setMinorVersion(final int minorVersion) {
+        this.minorVersion = minorVersion;
+    }
 
-	public void setLocation(String location) {
-		this.location = location;
-	}
+    public void setState(final int state) {
+        this.state = state;
+    }
 
-	public int getMajorVersion() {
-		return majorVersion;
-	}
+    public void setStateSignification(final String stateSignification) {
+        this.stateSignification = stateSignification;
+    }
 
-	public void setMajorVersion(int majorVersion) {
-		this.majorVersion = majorVersion;
-	}
+    public void setSymbolicName(final String symbolicName) {
+        this.symbolicName = symbolicName;
+    }
 
-	public int getMinorVersion() {
-		return minorVersion;
-	}
+    private void wrap(final Bundle bundle) {
+        bundleId = bundle.getBundleId();
+        symbolicName = bundle.getSymbolicName();
+        state = bundle.getState();
+        stateSignification = BundleStateEnum.detect(state).toString();
+        location = bundle.getLocation();
+        majorVersion = bundle.getVersion().getMajor();
+        minorVersion = bundle.getVersion().getMinor();
+    }
 
-	public void setMinorVersion(int minorVersion) {
-		this.minorVersion = minorVersion;
-	}
-	
 }

@@ -18,7 +18,7 @@ public class UninstallBundleCmd extends AbstractBundleContextCmd {
      * String bundle.
      */
     private final String bundle;
-	private final String version;
+    private final String version;
 
     /**
      * UninstallBundleCmd constructor.
@@ -31,7 +31,7 @@ public class UninstallBundleCmd extends AbstractBundleContextCmd {
     public UninstallBundleCmd(final BundleContext context, final String bundle, final String version) {
         super(context);
         this.bundle = bundle;
-        this.version=version;
+        this.version = version;
     }
 
     /**
@@ -41,10 +41,9 @@ public class UninstallBundleCmd extends AbstractBundleContextCmd {
     @Override
     public void execute() throws EquinoxCmdException {
         try {
-            new BundleUninstaller().processOnBundle(this.context,this.bundle,this.version);
+            new BundleUninstaller().processOnBundle(context, bundle, version);
         } catch (final TcOsgiException e) {
-        	LoggerGestionnary.getInstance(UninstallBundleCmd.class).error(
-                    "Desinstallation du bundle echoué :" + this.bundle , e);
+            LoggerGestionnary.getInstance(UninstallBundleCmd.class).error("Desinstallation du bundle echoué :" + bundle, e);
         }
 
     }

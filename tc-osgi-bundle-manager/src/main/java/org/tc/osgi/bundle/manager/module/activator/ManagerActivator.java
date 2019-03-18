@@ -20,121 +20,118 @@ import org.tc.osgi.bundle.utils.interf.module.service.IPropertyUtilsService;
 import org.tc.osgi.bundle.utils.interf.module.utils.AbstractTcOsgiActivator;
 import org.tc.osgi.bundle.utils.interf.module.utils.TcOsgiProxy;
 
-
 /**
  * Activator.java.
  *
  * @author Collonville Thomas
  * @version 0.0.2
  * @track SDD_BUNDLE_UTILS_100
- * 
+ *
  * http://localhost:4567/bundles/short
  * http://localhost:4567/fetchRemoteRepo
  * http://localhost:4567/updateLocal
  * http://localhost:4567/pullOnRemoteRepo/tc-osgi-bundle-berkeley-db-wrapper/5.0.73
- * 
- * 
- * 
+ *
+ *
+ *
  */
 public class ManagerActivator extends AbstractTcOsgiActivator {
 
-	private TcOsgiProxy<ILoggerUtilsService> iLoggerUtilsService;
-	private TcOsgiProxy<IPropertyUtilsService> iPropertyUtilsService;
-	private TcOsgiProxy<IBundleUtilsService> iBundleUtilsService;
-	private EquinoxLoaderManager manager;
-	
-	private RemoteRegistry repoRegistry;
-	private EquinoxRegistry equinoxRegistry;
-	
-	private String groovyDependencyBundleName;
-	private String groovyDependencyBundleVersion;
+    private EquinoxRegistry equinoxRegistry;
+    private String groovyDependencyBundleName;
+    private String groovyDependencyBundleVersion;
+    private TcOsgiProxy<IBundleUtilsService> iBundleUtilsService;
 
-	
+    private TcOsgiProxy<ILoggerUtilsService> iLoggerUtilsService;
+    private TcOsgiProxy<IPropertyUtilsService> iPropertyUtilsService;
 
-	
+    private EquinoxLoaderManager manager;
+    private RemoteRegistry repoRegistry;
 
-	@Override
-	protected void checkInitBundleUtilsService(BundleContext context) throws TcOsgiException {
-		throw new TcOsgiException("checkInitBundleUtilsService not implemented");
-	}
+    @Override
+    protected void afterStart(final BundleContext context) throws TcOsgiException {
+        manager = new EquinoxLoaderManager();
+        repoRegistry = new RemoteRegistry();
+        equinoxRegistry = new EquinoxRegistry();
+        try {
+            manager.createRegistry(manager.getPort());
+            manager.register(repoRegistry, RemoteRegistryMBean.class);
+            manager.register(equinoxRegistry, EquinoxRegistryMBean.class);
 
-	/**
-	 * activeUtilsService.
-	 * 
-	 * @param context BundleContext
-	 */
-	protected void initServices(final BundleContext context) {
-
-	}
-
-	@Override
-	protected void initProxys(BundleContext context) throws TcOsgiException {
-		this.iPropertyUtilsService = new TcOsgiProxy<IPropertyUtilsService>(context, IPropertyUtilsService.class);
-		PropertyServiceProxy.getInstance().setService(this.iPropertyUtilsService.getInstance());
-		this.iLoggerUtilsService = new TcOsgiProxy<ILoggerUtilsService>(context, ILoggerUtilsService.class);
-		LoggerServiceProxy.getInstance().setService(this.iLoggerUtilsService.getInstance());
-		this.iBundleUtilsService = new TcOsgiProxy<IBundleUtilsService>(context, IBundleUtilsService.class);
-		BundleUtilsServiceProxy.getInstance().setService(this.iBundleUtilsService.getInstance());
-	}
-
-	@Override
-	protected void detachProxys(BundleContext context) throws TcOsgiException {
-		this.iBundleUtilsService.close();
-		this.iLoggerUtilsService.close();
-		this.iPropertyUtilsService.close();
-		
-		
-
-	}
-
-	@Override
-	protected void detachServices(BundleContext context) throws TcOsgiException {
-
-	}
-
-	@Override
-	protected void beforeStart(BundleContext context) throws TcOsgiException {
-
-	}
-
-	@Override
-	protected void beforeStop(BundleContext context) throws TcOsgiException {
-		this.manager.unRegister(this.equinoxRegistry,RemoteRegistryMBean.class);
-		this.manager.unRegister(this.repoRegistry,EquinoxRegistryMBean.class);
-	}
-
-	@Override
-	protected void afterStart(BundleContext context) throws TcOsgiException {
-		this.manager=new EquinoxLoaderManager();
-		this.repoRegistry=new RemoteRegistry();
-		this.equinoxRegistry=new EquinoxRegistry();
-		try {
-			this.manager.createRegistry(this.manager.getPort());
-			this.manager.register(repoRegistry,RemoteRegistryMBean.class);
-			this.manager.register(equinoxRegistry,EquinoxRegistryMBean.class);
-			
-			this.iBundleUtilsService.getInstance().getBundleStarter().processOnBundle(context, this.getGroovyDependencyBundleName(),this.getGroovyDependencyBundleVersion());
-		} catch (RemoteException e) {
-			throw new TcOsgiException("Erreur d'initialisation du bundle manager",e);
-		}
-	}
-	
-	public String getGroovyDependencyBundleName() throws FieldTrackingAssignementException  {
-        if (this.groovyDependencyBundleName == null) {
-        	PropertyServiceProxy.getInstance().getXMLPropertyFile(ManagerPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "groovyDependencyBundleName");
+            iBundleUtilsService.getInstance().getBundleStarter().processOnBundle(context, getGroovyDependencyBundleName(),
+                getGroovyDependencyBundleVersion());
+        } catch (final RemoteException e) {
+            throw new TcOsgiException("Erreur d'initialisation du bundle manager", e);
         }
-        return this.groovyDependencyBundleName;
-    }
-    
-    public String getGroovyDependencyBundleVersion() throws FieldTrackingAssignementException  {
-        if (this.groovyDependencyBundleVersion == null) {
-        	PropertyServiceProxy.getInstance().getXMLPropertyFile(ManagerPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "groovyDependencyBundleVersion");
-        }
-        return this.groovyDependencyBundleVersion;
     }
 
-	@Override
-	protected void afterStop(BundleContext context) throws TcOsgiException {
-	}
+    @Override
+    protected void afterStop(final BundleContext context) throws TcOsgiException {
+    }
+
+    @Override
+    protected void beforeStart(final BundleContext context) throws TcOsgiException {
+
+    }
+
+    @Override
+    protected void beforeStop(final BundleContext context) throws TcOsgiException {
+        manager.unRegister(equinoxRegistry, RemoteRegistryMBean.class);
+        manager.unRegister(repoRegistry, EquinoxRegistryMBean.class);
+    }
+
+    @Override
+    protected void checkInitBundleUtilsService(final BundleContext context) throws TcOsgiException {
+        throw new TcOsgiException("checkInitBundleUtilsService not implemented");
+    }
+
+    @Override
+    protected void detachProxys(final BundleContext context) throws TcOsgiException {
+        iBundleUtilsService.close();
+        iLoggerUtilsService.close();
+        iPropertyUtilsService.close();
+
+    }
+
+    @Override
+    protected void detachServices(final BundleContext context) throws TcOsgiException {
+
+    }
+
+    public String getGroovyDependencyBundleName() throws FieldTrackingAssignementException {
+        if (groovyDependencyBundleName == null) {
+            PropertyServiceProxy.getInstance().getXMLPropertyFile(ManagerPropertyFile.getInstance().getXMLFile()).fieldTraking(this,
+                "groovyDependencyBundleName");
+        }
+        return groovyDependencyBundleName;
+    }
+
+    public String getGroovyDependencyBundleVersion() throws FieldTrackingAssignementException {
+        if (groovyDependencyBundleVersion == null) {
+            PropertyServiceProxy.getInstance().getXMLPropertyFile(ManagerPropertyFile.getInstance().getXMLFile()).fieldTraking(this,
+                "groovyDependencyBundleVersion");
+        }
+        return groovyDependencyBundleVersion;
+    }
+
+    @Override
+    protected void initProxys(final BundleContext context) throws TcOsgiException {
+        iPropertyUtilsService = new TcOsgiProxy<IPropertyUtilsService>(context, IPropertyUtilsService.class);
+        PropertyServiceProxy.getInstance().setService(iPropertyUtilsService.getInstance());
+        iLoggerUtilsService = new TcOsgiProxy<ILoggerUtilsService>(context, ILoggerUtilsService.class);
+        LoggerServiceProxy.getInstance().setService(iLoggerUtilsService.getInstance());
+        iBundleUtilsService = new TcOsgiProxy<IBundleUtilsService>(context, IBundleUtilsService.class);
+        BundleUtilsServiceProxy.getInstance().setService(iBundleUtilsService.getInstance());
+    }
+
+    /**
+     * activeUtilsService.
+     * 
+     * @param context BundleContext
+     */
+    @Override
+    protected void initServices(final BundleContext context) {
+
+    }
 
 }

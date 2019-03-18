@@ -20,39 +20,39 @@ import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
  */
 public interface IBundleUtilsService {
 
-	/**
-	 * getBundleContext.
-	 * @return BundleContext
-	 * @throws FieldTrackingAssignementException
-	 * @throws MalformedURLException
-	 * @throws RemoteException
-	 * @throws NotBoundException
-	 * @throws NumberFormatException
-	 * @throws UnknownHostException
-	 * @throws TcOsgiException 
-	 */
-	public BundleContext getBundleContext() throws TcOsgiException;
+    /**
+     * getBundleContext.
+     * @return BundleContext
+     * @throws FieldTrackingAssignementException
+     * @throws MalformedURLException
+     * @throws RemoteException
+     * @throws NotBoundException
+     * @throws NumberFormatException
+     * @throws UnknownHostException
+     * @throws TcOsgiException 
+     */
+    public BundleContext getBundleContext() throws TcOsgiException;
 
-	/**
-	 * getBundleKiller.
-	 * @return BundleKiller
-	 */
-	public IBundleCommand getBundleKiller();
-	
-	public IBundleCommand getBundleUninstaller();
-	
-	public IBundleCommand getBundleInstaller();
+    public IBundleCommand getBundleInstaller();
 
-	/**
-	 * getBundleStarter.
-	 * @return BundleStarter
-	 */
-	public IBundleCommand getBundleStarter();
+    /**
+     * getBundleKiller.
+     * @return BundleKiller
+     */
+    public IBundleCommand getBundleKiller();
 
-	public void getClassloaderContent(final ClassLoader loader);
+    /**
+     * getBundleStarter.
+     * @return BundleStarter
+     */
+    public IBundleCommand getBundleStarter();
 
-	public <T> void registerService(Class<T> _class, T instance, final BundleContext context, BundleActivator activator);
+    public IBundleCommand getBundleUninstaller();
 
-	public void unregister(Class _class, BundleActivator activator);
+    public void getClassloaderContent(final ClassLoader loader);
+
+    public <T> void registerService(Class<T> _class, T instance, final BundleContext context, BundleActivator activator);
+
+    public void unregister(Class _class, BundleActivator activator);
 
 }

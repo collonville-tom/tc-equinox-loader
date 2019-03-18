@@ -14,11 +14,11 @@ import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementEx
  */
 public interface IEquinoxLoaderBundleContext extends Remote, Serializable {
 
-	/**
-	 * getBundleContext.
-	 * @return BundleContext
-	 * @throws FieldTrackingAssignementException
-	 */
-	public BundleContext getBundleContext() throws FieldTrackingAssignementException;
+    /**
+     * getBundleContext.
+     * @return BundleContext
+     * @throws FieldTrackingAssignementException
+     */
+    public BundleContext getBundleContext() throws FieldTrackingAssignementException;
 
 }

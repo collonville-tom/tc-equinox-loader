@@ -16,70 +16,71 @@ import org.tc.osgi.bundle.utils.interf.pattern.command.ICommandRepository;
  */
 public class DefaultRepository implements ICommandRepository {
 
-	/**
-	 * Repository repository.
-	 */
-	private static DefaultRepository repository = null;
+    /**
+     * Repository repository.
+     */
+    private static DefaultRepository repository = null;
 
-	/**
-	 * getInstance.
-	 *
-	 * @return Repository
-	 */
-	public static DefaultRepository getInstance() {
-		if (DefaultRepository.repository == null) {
-			DefaultRepository.repository = new DefaultRepository();
-		}
-		return DefaultRepository.repository;
-	}
+    /**
+     * getInstance.
+     *
+     * @return Repository
+     */
+    public static DefaultRepository getInstance() {
+        if (DefaultRepository.repository == null) {
+            DefaultRepository.repository = new DefaultRepository();
+        }
+        return DefaultRepository.repository;
+    }
 
-	/**
-	 * List<Command> commands.
-	 */
-	private List<ICommand> commands = null;
+    /**
+     * List<Command> commands.
+     */
+    private List<ICommand> commands = null;
 
-	/**
-	 * Repository constructor.
-	 */
-	private DefaultRepository() {
-		super();
-	}
+    /**
+     * Repository constructor.
+     */
+    private DefaultRepository() {
+        super();
+    }
 
-	/**
-	 * getCommandsIterator.
-	 *
-	 * @return CommandsIterator
-	 */
-	public Iterator<ICommand> getCommandsIterator() {
-		return this.getInstructions().iterator();
-	}
+    @Override
+    public void addInstruction(final ICommand cmd) {
+        getInstructions().add(cmd);
 
-	/**
-	 * getInstructions.
-	 *
-	 * @return List<Command>
-	 */
-	public List<ICommand> getInstructions() {
-		if (commands == null) {
-			commands = new ArrayList<ICommand>();
-		}
-		return commands;
-	}
+    }
 
-	/**
-	 * setInstructions.
-	 *
-	 * @param commands
-	 *            List<Command>
-	 */
-	public void setInstructions(final List<ICommand> commands) {
-		this.commands = commands;
-	}
+    /**
+     * getCommandsIterator.
+     *
+     * @return CommandsIterator
+     */
+    @Override
+    public Iterator<ICommand> getCommandsIterator() {
+        return getInstructions().iterator();
+    }
 
-	@Override
-	public void addInstruction(ICommand cmd) {
-		this.getInstructions().add(cmd);
+    /**
+     * getInstructions.
+     *
+     * @return List<Command>
+     */
+    public List<ICommand> getInstructions() {
+        if (commands == null) {
+            commands = new ArrayList<ICommand>();
+        }
+        return commands;
+    }
 
-	}
+    /**
+     * setInstructions.
+     *
+     * @param commands
+     *            List<Command>
+     */
+    public void setInstructions(final List<ICommand> commands) {
+        this.commands = commands;
+    }
 
 }

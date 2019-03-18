@@ -9,12 +9,11 @@ import org.tc.osgi.bundle.utils.interf.collection.IPredicate;
 import org.tc.osgi.bundle.utils.logger.LoggerGestionnary;
 import org.tc.osgi.bundle.utils.module.service.impl.CollectionUtilsServiceImpl;
 
-
 public class BundleFilterUtils {
-	   /**
-     * String EXCLUDE_ECLIPSE.
-     * Pour eviter un auto load au demarrage
-     */
+    /**
+    * String EXCLUDE_ECLIPSE.
+    * Pour eviter un auto load au demarrage
+    */
     public static final String EXCLUDE_ECLIPSE = "osgi";
     public static final String EXCLUDE_ECLIPSE_2 = "org.eclipse.osgi";
     public static final String EXCLUDE_ECLIPSE_3 = "org.apache.felix.framework";
@@ -28,8 +27,8 @@ public class BundleFilterUtils {
      * String JAR_EXT.
      */
     public static final String JAR_EXT = ".jar";
-	
-	public Collection<File> filterFile2Install(final List<File> files, final Bundle[] bundles) {
+
+    public Collection<File> filterFile2Install(final List<File> files, final Bundle[] bundles) {
         return CollectionUtilsServiceImpl.getInstance().select(files, new IPredicate<File>() {
             @Override
             public boolean evaluate(final File f) {

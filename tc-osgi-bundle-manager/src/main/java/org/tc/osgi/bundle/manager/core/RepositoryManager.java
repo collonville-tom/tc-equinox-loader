@@ -9,37 +9,34 @@ import org.tc.osgi.bundle.manager.mbean.RemoteRepository;
 
 public class RepositoryManager {
 
-	private Map<String, RemoteRepository> repositories = new HashMap<>();
-	private LocalRepository localRepository;
-	
+    public static final String DEFAULT_NAME = "default";
+    private static RepositoryManager instance;
 
+    public static final String LOCAL_NAME = "local";
 
-	private static RepositoryManager instance;
+    public static RepositoryManager getRepositoryManager() {
+        if (RepositoryManager.instance == null) {
+            RepositoryManager.instance = new RepositoryManager();
+        }
+        return RepositoryManager.instance;
+    }
 
-	public static final String LOCAL_NAME = "local";
-	public static final String DEFAULT_NAME = "default";
-	
-	private RepositoryManager() {
-		RemoteRepository r = new RemoteRepository(DEFAULT_NAME,
-				ManagerPropertyFile.getInstance().getStaticRepositoryUrl());
-		this.repositories.put(DEFAULT_NAME, r);
-		this.localRepository = new LocalRepository(LOCAL_NAME, ManagerPropertyFile.getInstance().getWorkDirectory());
-	}
-	
-	public static RepositoryManager getRepositoryManager()
-	{
-		if(instance==null)
-		{
-			instance=new RepositoryManager();
-		}
-		return instance;
-	}
-	
-	public Map<String, RemoteRepository> getRepositories() {
-		return repositories;
-	}
+    private final LocalRepository localRepository;
 
-	public LocalRepository getLocalRepository() {
-		return localRepository;
-	}
+    private final Map<String, RemoteRepository> repositories = new HashMap<>();
+
+    private RepositoryManager() {
+        final RemoteRepository r = new RemoteRepository(RepositoryManager.DEFAULT_NAME, ManagerPropertyFile.getInstance()
+            .getStaticRepositoryUrl());
+        repositories.put(RepositoryManager.DEFAULT_NAME, r);
+        localRepository = new LocalRepository(RepositoryManager.LOCAL_NAME, ManagerPropertyFile.getInstance().getWorkDirectory());
+    }
+
+    public LocalRepository getLocalRepository() {
+        return localRepository;
+    }
+
+    public Map<String, RemoteRepository> getRepositories() {
+        return repositories;
+    }
 }

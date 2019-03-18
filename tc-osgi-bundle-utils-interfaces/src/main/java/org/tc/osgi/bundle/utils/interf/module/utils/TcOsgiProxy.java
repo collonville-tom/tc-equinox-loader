@@ -11,40 +11,40 @@ import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 
 public class TcOsgiProxy<T> implements InvocationHandler {
 
-	private T service;
-	private T proxy;
+    private T proxy;
+    private T service;
 
-	public void setProxy(T proxy) {
-		this.proxy = proxy;
-	}
+    private TcOsgiServiceTracker<T> tracker;
 
-	private TcOsgiServiceTracker<T> tracker;
+    public TcOsgiProxy(final BundleContext context, final Class<T> t) throws TcOsgiException {
+        try {
+            this.tracker = new TcOsgiServiceTracker<T>(context, t);
 
-	public TcOsgiProxy(BundleContext context, Class<T> t) throws TcOsgiException {
-		try {
-			this.tracker = new TcOsgiServiceTracker<T>(context, t);
+            tracker.open();
+            this.service = tracker.getService();
+            if (this.service != null) {
+                this.proxy = (T) Proxy.newProxyInstance(service.getClass().getClassLoader(), service.getClass().getInterfaces(), this);
+            }
+        } catch (InvalidSyntaxException | BundleException e) {
+            throw new TcOsgiException("TcOsgiServiceTracker not found", e);
+        }
+    }
 
-			tracker.open();
-			this.service = (T) tracker.getService();
-			if (this.service != null) {
-				this.proxy = (T) Proxy.newProxyInstance(service.getClass().getClassLoader(), service.getClass().getInterfaces(), this);
-			}
-		} catch (InvalidSyntaxException | BundleException e) {
-			throw new TcOsgiException("TcOsgiServiceTracker not found", e);
-		}
-	}
+    public void close() {
+        this.tracker.close();
+    }
 
-	public T getInstance() {
-		return this.proxy;
-	}
+    public T getInstance() {
+        return this.proxy;
+    }
 
-	@Override
-	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-		return method.invoke(service, args);
-	}
+    @Override
+    public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
+        return method.invoke(service, args);
+    }
 
-	public void close() {
-		this.tracker.close();
-	}
+    public void setProxy(final T proxy) {
+        this.proxy = proxy;
+    }
 
 }

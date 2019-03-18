@@ -9,11 +9,11 @@ package org.tc.osgi.bundle.utils.interf.pattern.visitor;
  */
 public interface IVisitor<T extends IVisitable> {
 
-	/**
-	 * visit.
-	 *
-	 * @param o
-	 *            IVisitable
-	 */
-	public void visit(T o);
+    /**
+     * visit.
+     *
+     * @param o
+     *            IVisitable
+     */
+    public void visit(T o);
 }

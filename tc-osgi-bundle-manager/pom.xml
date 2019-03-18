@@ -8,37 +8,30 @@
 
 
 	<properties>
-		<build>0.2.0</build>
-		<snapshot>-SNAPSHOT</snapshot>
-		<utils.interfaces.version>0.2.0</utils.interfaces.version>
-		<utils.version>0.4.0</utils.version>
-		<equinox-loader.version>0.3.0</equinox-loader.version>
-		<groovy.version>0.1.0</groovy.version>
-		<docker.latest>0.3.0</docker.latest><!-- si on est en snapshot il faut mettre latest sinon mettre la version de l'interface -->
-		<manager.jmx.port>7001</manager.jmx.port>
+		<build>${tc-osgi-bundle-manager}</build>
 	</properties>
 
-	<version>${build}${snapshot}</version>
+	<version>${tc-osgi-bundle-manager.version}${tc-osgi-bundle-manager.pom}${tc-osgi-bundle-manager.snapshot}</version>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.tc.osgi.bundle.utils</groupId>
 			<artifactId>tc-osgi-bundle-utils-interfaces</artifactId>
-			<version>${utils.interfaces.version}${snapshot}</version>
+			<version>${tc-osgi-bundle-utils-interfaces.version}${tc-osgi-bundle-utils-interfaces.pom}${tc-osgi-bundle-utils-interfaces.snapshot}</version>
 			<classifier>assembly</classifier>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.tc.osgi.bundle.utils</groupId>
 			<artifactId>tc-osgi-bundle-utils</artifactId>
-			<version>${utils.version}${snapshot}</version>
+			<version>${tc-osgi-bundle-utils.version}${tc-osgi-bundle-utils.pom}${tc-osgi-bundle-utils.snapshot}</version>
 			<classifier>assembly</classifier>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.tc.osgi</groupId>
 			<artifactId>tc-osgi-equinox-loader</artifactId>
-			<version>${equinox-loader.version}${snapshot}</version>
+			<version>${tc-osgi-equinox-loader.version}${tc-osgi-equinox-loader.pom}${tc-osgi-equinox-loader.snapshot}</version>
 			<classifier>assembly</classifier>
 			<scope>test</scope>
 		</dependency>
@@ -114,10 +107,10 @@
 							<images>
 								<image>
 									<build>
-										<from>${docker.login}/tc-osgi-equinox-loader:${docker.latest}</from>
+										<from>${docker.login}/tc-osgi-equinox-loader:${tc-osgi-equinox-loader.latest}</from>
 										<!-- <cmd>/bin/sh</cmd> -->
 										<ports>
-											<port>${manager.jmx.port}</port>
+											<port>${jmx.port}</port>
 										</ports>
 									</build>
 								</image>

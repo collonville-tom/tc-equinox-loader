@@ -13,38 +13,38 @@ import org.tc.osgi.bundle.utils.interf.pattern.visitor.IVisitor;
  */
 public abstract class AbstractDraftman implements IVisitor {
 
-	/**
-	 * Graphics graphics.
-	 */
-	private Graphics graphics;
+    /**
+     * Graphics graphics.
+     */
+    private Graphics graphics;
 
-	/**
-	 * AbstractDraftman constructor.
-	 *
-	 * @param g
-	 *            Graphics
-	 */
-	public AbstractDraftman(final Graphics g) {
-		graphics = g;
-	}
+    /**
+     * AbstractDraftman constructor.
+     *
+     * @param g
+     *            Graphics
+     */
+    public AbstractDraftman(final Graphics g) {
+        graphics = g;
+    }
 
-	/**
-	 * getGraphics.
-	 *
-	 * @return Graphics
-	 */
-	public Graphics getGraphics() {
-		return graphics;
-	}
+    /**
+     * getGraphics.
+     *
+     * @return Graphics
+     */
+    public Graphics getGraphics() {
+        return graphics;
+    }
 
-	/**
-	 * setGraphics.
-	 *
-	 * @param graphics
-	 *            Graphics
-	 */
-	public void setGraphics(final Graphics graphics) {
-		this.graphics = graphics;
-	}
+    /**
+     * setGraphics.
+     *
+     * @param graphics
+     *            Graphics
+     */
+    public void setGraphics(final Graphics graphics) {
+        this.graphics = graphics;
+    }
 
 }

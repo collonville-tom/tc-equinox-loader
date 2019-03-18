@@ -28,7 +28,8 @@ public class EquinoxLoaderRMIServerTest {
     public void test() {
         EquinoxPropertyFile.EQUINOX_LOADER_FILE = "equinox-loader_test";
         try {
-            EquinoxLoaderRMIServer.getInstance().addObject(IEquinoxLoaderBundleContext.class.getSimpleName(), new EquinoxLoaderBundleContextImpl());
+            EquinoxLoaderRMIServer.getInstance().addObject(IEquinoxLoaderBundleContext.class.getSimpleName(),
+                new EquinoxLoaderBundleContextImpl());
         } catch (RemoteException | MalformedURLException | UnknownHostException | FieldTrackingAssignementException e) {
             Assert.fail(e.getLocalizedMessage());
         }

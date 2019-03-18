@@ -12,7 +12,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
-import org.tc.osgi.bundle.utils.context.BundleStarter;
+import org.tc.osgi.bundle.utils.interf.context.IBundleCommand;
 import org.tc.osgi.equinox.loader.cmd.exception.EquinoxCmdException;
 import org.tc.osgi.equinox.loader.conf.EquinoxPropertyFile;
 
@@ -26,13 +26,12 @@ public class UninstallBundleCmdTest {
 
     @Test
     public void test() {
-    	
+
         final String version = "versionBundle";
 
-        Dictionary<String,String> d=new Headers<String,String>(1);
-        d.put(BundleStarter.VERSION_H, version);
-    	
-    	
+        final Dictionary<String, String> d = new Headers<String, String>(1);
+        d.put(IBundleCommand.VERSION_H, version);
+
         final Bundle[] tab = {};
         EquinoxPropertyFile.EQUINOX_LOADER_FILE = "equinox-loader_test";
         final List<Bundle> bundles = new ArrayList<Bundle>();
@@ -41,7 +40,7 @@ public class UninstallBundleCmdTest {
         Mockito.when(b1.getLocation()).thenReturn("Bundle1");
         Mockito.when(b1.getSymbolicName()).thenReturn("Bundle1");
         Mockito.when(b1.getHeaders()).thenReturn(d);
-        
+
         final Bundle b2 = Mockito.mock(Bundle.class);
         Mockito.when(b2.toString()).thenReturn("unknown");
         Mockito.when(b2.getLocation()).thenReturn("unknown");
@@ -58,7 +57,7 @@ public class UninstallBundleCmdTest {
         final BundleContext context = Mockito.mock(BundleContext.class);
         Mockito.when(context.getBundles()).thenReturn(bundles.toArray(tab));
 
-        final UninstallBundleCmd cmd = new UninstallBundleCmd(context, "Bundle1","version");
+        final UninstallBundleCmd cmd = new UninstallBundleCmd(context, "Bundle1", "version");
 
         try {
             cmd.execute();

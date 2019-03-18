@@ -8,30 +8,30 @@ package org.tc.osgi.bundle.utils.interf.exception;
  */
 public class TcOsgiException extends Exception {
 
-	/**
-	 * long serialVersionUID.
-	 */
-	private static final long serialVersionUID = -2499523546746233719L;
+    /**
+     * long serialVersionUID.
+     */
+    private static final long serialVersionUID = -2499523546746233719L;
 
-	/**
-	 * UtilsException constructor.
-	 *
-	 * @param _message
-	 *            String
-	 */
-	public TcOsgiException(final String _message) {
-		super(_message);
-	}
+    /**
+     * UtilsException constructor.
+     *
+     * @param _message
+     *            String
+     */
+    public TcOsgiException(final String _message) {
+        super(_message);
+    }
 
-	/**
-	 * UtilsException constructor.
-	 *
-	 * @param _message
-	 *            String
-	 * @param _e
-	 *            Throwable
-	 */
-	public TcOsgiException(final String _message, final Throwable _e) {
-		super(_message, _e);
-	}
+    /**
+     * UtilsException constructor.
+     *
+     * @param _message
+     *            String
+     * @param _e
+     *            Throwable
+     */
+    public TcOsgiException(final String _message, final Throwable _e) {
+        super(_message, _e);
+    }
 }

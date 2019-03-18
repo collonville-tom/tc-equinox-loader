@@ -13,11 +13,11 @@ import org.tc.osgi.bundle.utils.interf.pattern.command.exception.CommandExecutio
  */
 public interface ICommand {
 
-	/**
-	 * exec.
-	 *
-	 * @throws CommandExecutionException
-	 */
-	public abstract void exec() throws CommandExecutionException;
+    /**
+     * exec.
+     *
+     * @throws CommandExecutionException
+     */
+    public abstract void exec() throws CommandExecutionException;
 
 }

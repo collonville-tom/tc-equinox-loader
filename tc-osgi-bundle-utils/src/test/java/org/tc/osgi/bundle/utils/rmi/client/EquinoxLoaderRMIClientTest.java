@@ -92,8 +92,8 @@ public class EquinoxLoaderRMIClientTest extends AbstractRMIServer implements Ser
             Assert.fail(e.getMessage());
         } catch (final MalformedURLException e) {
             Assert.fail(e.getMessage());
-        } catch (TcOsgiException e) {
-        	Assert.fail(e.getMessage());
-		} 
+        } catch (final TcOsgiException e) {
+            Assert.fail(e.getMessage());
+        }
     }
 }

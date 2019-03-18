@@ -4,8 +4,8 @@ import java.util.Iterator;
 
 public interface ICommandRepository {
 
-	public void addInstruction(ICommand cmd);
+    public void addInstruction(ICommand cmd);
 
-	public Iterator<ICommand> getCommandsIterator();
+    public Iterator<ICommand> getCommandsIterator();
 
 }

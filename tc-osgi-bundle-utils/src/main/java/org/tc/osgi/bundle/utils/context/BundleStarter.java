@@ -16,36 +16,38 @@ import org.tc.osgi.bundle.utils.logger.LoggerGestionnary;
  */
 public class BundleStarter implements IBundleCommand {
 
-	/**
-	 * startBundle.
-	 * @param context BundleContext
-	 * @param bundleName String
-	 * @throws BundleException
-	 */
+    @Override
+    public void processOnBundle(final BundleContext context, final String bundleName, final String version) throws TcOsgiException {
+        try {
+            startBundle(context, bundleName, version);
+        } catch (final BundleException e) {
+            throw new TcOsgiException("Erreur lors du lancement du bundle " + bundleName, e);
+        }
+    }
 
-	public void startBundle(final BundleContext context, final String bundleName, String bundleVersion) throws BundleException {
-		final Bundle[] bundles = context.getBundles();
+    /**
+     * startBundle.
+     * @param context BundleContext
+     * @param bundleName String
+     * @throws BundleException
+     */
 
-		for (int i = 0; i < bundles.length; i++) {
-			if (bundles[i].getSymbolicName().equals(bundleName)) {
-				LoggerGestionnary.getInstance(BundleStarter.class).debug("Header " + bundles[i].getHeaders().get(VERSION_H) + "but is:" +bundleVersion);
-				if (bundles[i].getHeaders().get(VERSION_H).equals(bundleVersion)) {
-				LoggerGestionnary.getInstance(BundleStarter.class).debug("Start of " + bundles[i].getSymbolicName() + ", state:" + bundles[i].getState());
-				if (bundles[i].getState() != Bundle.STARTING) { // =8,
-					// RESOLVED=4
-					bundles[i].start();
-				}
-				}
-			}
-		}
-	}
+    public void startBundle(final BundleContext context, final String bundleName, final String bundleVersion) throws BundleException {
+        final Bundle[] bundles = context.getBundles();
 
-	@Override
-	public void processOnBundle(BundleContext context, String bundleName,String version) throws TcOsgiException {
-		try {
-			this.startBundle(context, bundleName,version);
-		} catch (BundleException e) {
-			throw new TcOsgiException("Erreur lors du lancement du bundle " + bundleName, e);
-		}
-	}
+        for (int i = 0; i < bundles.length; i++) {
+            if (bundles[i].getSymbolicName().equals(bundleName)) {
+                LoggerGestionnary.getInstance(BundleStarter.class).debug("Header " + bundles[i].getHeaders().get(IBundleCommand.VERSION_H)
+                    + "but is:" + bundleVersion);
+                if (bundles[i].getHeaders().get(IBundleCommand.VERSION_H).equals(bundleVersion)) {
+                    LoggerGestionnary.getInstance(BundleStarter.class).debug("Start of " + bundles[i].getSymbolicName() + ", state:"
+                        + bundles[i].getState());
+                    if (bundles[i].getState() != Bundle.STARTING) { // =8,
+                        // RESOLVED=4
+                        bundles[i].start();
+                    }
+                }
+            }
+        }
+    }
 }

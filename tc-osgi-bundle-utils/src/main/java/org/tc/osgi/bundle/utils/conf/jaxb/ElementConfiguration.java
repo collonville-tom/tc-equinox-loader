@@ -17,9 +17,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * <p>Java class for ElementConfiguration complex type.
+ * <p>
+ * Java class for ElementConfiguration complex type.
  *
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  *
  * <pre>
  * &lt;complexType name="ElementConfiguration">
@@ -38,6 +41,7 @@ import javax.xml.bind.annotation.XmlType;
  *
  *
  * ElementConfiguration.java.
+ * 
  * @author collonville thomas
  * @version 0.2.2
  * @track SDD_BUNDLE_UTILS_025

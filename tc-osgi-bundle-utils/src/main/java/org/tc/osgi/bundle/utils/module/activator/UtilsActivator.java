@@ -30,99 +30,96 @@ import org.tc.osgi.bundle.utils.rmi.client.EquinoxLoaderRMIClient;
  */
 public class UtilsActivator extends AbstractTcOsgiActivator {
 
-	/**
-	 * String version.
-	 */
-	private String version;
+    /**
+     * String version.
+     */
+    private String version;
 
-	/**
-	 * getVersion.
-	 * 
-	 * @return String
-	 * @throws FieldTrackingAssignementException
-	 */
-	public String getVersion() throws FieldTrackingAssignementException {
-		if (version == null) {
-			XMLPropertyFile.getInstance(UtilsPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "version");
-		}
-		return version;
-	}
+    @Override
+    protected void afterStart(final BundleContext context) throws TcOsgiException {
+        LoggerGestionnary.getInstance(UtilsActivator.class).debug("UtilsService start");
 
-	@Override
-	protected void checkInitBundleUtilsService(BundleContext context) throws TcOsgiException {
-		this.getIBundleUtilsService().setProxy(new BundleUtilsServiceImpl());
-		this.getIBundleUtilsService().getInstance().registerService(IBundleUtilsService.class,
-				this.getIBundleUtilsService().getInstance(), context, this);
-	}
+        LoggerGestionnary.getInstance(UtilsActivator.class).debug("Test conso objet RMI");
+        EquinoxLoaderRMIClient.getInstance().getIEquinoxLoaderBundleContext();
+        LoggerGestionnary.getInstance(UtilsActivator.class).debug("Test conso objet RMI OK");
 
-	/**
-	 * activeUtilsService.
-	 * 
-	 * @param context BundleContext
-	 */
-	protected void initServices(final BundleContext context) {
-		this.getIBundleUtilsService().getInstance().registerService(ILoggerUtilsService.class,
-				new LoggerUtilsServiceImpl(), context, this);
-		this.getIBundleUtilsService().getInstance().registerService(IUtilsService.class, new UtilsServiceImpl(),
-				context, this);
-		this.getIBundleUtilsService().getInstance().registerService(ICollectionUtilsService.class,
-				new CollectionUtilsServiceImpl(), context, this);
-		this.getIBundleUtilsService().getInstance().registerService(IPropertyUtilsService.class,
-				new PropertyUtilsServiceImpl(), context, this);
-		this.getIBundleUtilsService().getInstance().registerService(ICommandRunnerUtilsService.class,
-				CommandRunnerUtilsServiceImpl.getInstance(), context, this);
+    }
 
-	}
+    @Override
+    protected void afterStop(final BundleContext context) throws TcOsgiException {
+        LoggerGestionnary.getInstance(UtilsActivator.class).debug("UtilsService stop");
+    }
 
-	@Override
-	protected void initProxys(BundleContext context) throws TcOsgiException {
-		// TODO Auto-generated method stub
+    @Override
+    protected void beforeStart(final BundleContext context) throws TcOsgiException {
 
-	}
+    }
 
-	@Override
-	protected void detachProxys(BundleContext context) throws TcOsgiException {
-		// TODO Auto-generated method stub
+    @Override
+    protected void beforeStop(final BundleContext context) throws TcOsgiException {
+        LoggerGestionnary.getInstance(UtilsActivator.class).debug("VersionStatic:" + UtilsPropertyFile.getInstance().getVersion());
+        LoggerGestionnary.getInstance(UtilsActivator.class).debug("VersionDynamic:" + getVersion());
 
-	}
+    }
 
-	@Override
-	protected void detachServices(BundleContext context) throws TcOsgiException {
-		this.getIBundleUtilsService().getInstance().unregister(ICommandRunnerUtilsService.class, this);
-		this.getIBundleUtilsService().getInstance().unregister(IUtilsService.class, this);
-		this.getIBundleUtilsService().getInstance().unregister(ICollectionUtilsService.class, this);
-		this.getIBundleUtilsService().getInstance().unregister(ILoggerUtilsService.class, this);
-		this.getIBundleUtilsService().getInstance().unregister(IPropertyUtilsService.class, this);
-		this.getIBundleUtilsService().getInstance().unregister(IBundleUtilsService.class, this);
+    @Override
+    protected void checkInitBundleUtilsService(final BundleContext context) throws TcOsgiException {
+        getIBundleUtilsService().setProxy(new BundleUtilsServiceImpl());
+        getIBundleUtilsService().getInstance().registerService(IBundleUtilsService.class, getIBundleUtilsService().getInstance(), context,
+            this);
+    }
 
-	}
+    @Override
+    protected void detachProxys(final BundleContext context) throws TcOsgiException {
+        // TODO Auto-generated method stub
 
-	@Override
-	protected void beforeStart(BundleContext context) throws TcOsgiException {
+    }
 
-	}
+    @Override
+    protected void detachServices(final BundleContext context) throws TcOsgiException {
+        getIBundleUtilsService().getInstance().unregister(ICommandRunnerUtilsService.class, this);
+        getIBundleUtilsService().getInstance().unregister(IUtilsService.class, this);
+        getIBundleUtilsService().getInstance().unregister(ICollectionUtilsService.class, this);
+        getIBundleUtilsService().getInstance().unregister(ILoggerUtilsService.class, this);
+        getIBundleUtilsService().getInstance().unregister(IPropertyUtilsService.class, this);
+        getIBundleUtilsService().getInstance().unregister(IBundleUtilsService.class, this);
 
-	@Override
-	protected void beforeStop(BundleContext context) throws TcOsgiException {
-		LoggerGestionnary.getInstance(UtilsActivator.class)
-				.debug("VersionStatic:" + UtilsPropertyFile.getInstance().getVersion());
-		LoggerGestionnary.getInstance(UtilsActivator.class).debug("VersionDynamic:" + this.getVersion());
+    }
 
-	}
+    /**
+     * getVersion.
+     * 
+     * @return String
+     * @throws FieldTrackingAssignementException
+     */
+    public String getVersion() throws FieldTrackingAssignementException {
+        if (version == null) {
+            XMLPropertyFile.getInstance(UtilsPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "version");
+        }
+        return version;
+    }
 
-	@Override
-	protected void afterStart(BundleContext context) throws TcOsgiException {
-		LoggerGestionnary.getInstance(UtilsActivator.class).debug("UtilsService start");
+    @Override
+    protected void initProxys(final BundleContext context) throws TcOsgiException {
+        // TODO Auto-generated method stub
 
-		LoggerGestionnary.getInstance(UtilsActivator.class).debug("Test conso objet RMI");
-		EquinoxLoaderRMIClient.getInstance().getIEquinoxLoaderBundleContext();
-		LoggerGestionnary.getInstance(UtilsActivator.class).debug("Test conso objet RMI OK");
+    }
 
-	}
+    /**
+     * activeUtilsService.
+     * 
+     * @param context BundleContext
+     */
+    @Override
+    protected void initServices(final BundleContext context) {
+        getIBundleUtilsService().getInstance().registerService(ILoggerUtilsService.class, new LoggerUtilsServiceImpl(), context, this);
+        getIBundleUtilsService().getInstance().registerService(IUtilsService.class, new UtilsServiceImpl(), context, this);
+        getIBundleUtilsService().getInstance().registerService(ICollectionUtilsService.class, new CollectionUtilsServiceImpl(), context,
+            this);
+        getIBundleUtilsService().getInstance().registerService(IPropertyUtilsService.class, new PropertyUtilsServiceImpl(), context, this);
+        getIBundleUtilsService().getInstance().registerService(ICommandRunnerUtilsService.class, CommandRunnerUtilsServiceImpl
+            .getInstance(), context, this);
 
-	@Override
-	protected void afterStop(BundleContext context) throws TcOsgiException {
-		LoggerGestionnary.getInstance(UtilsActivator.class).debug("UtilsService stop");
-	}
+    }
 
 }

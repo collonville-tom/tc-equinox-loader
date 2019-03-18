@@ -10,213 +10,173 @@ import org.tc.osgi.bundle.manager.exception.TcEquinoxRegistryException;
 
 public class BundleControlWrapper {
 
-	private String packageName;
-	public static final String PACKAGE ="Package:";
-	private String version;
-	public static final String VERSION="Version:";
-	private String section;
-	public static final String SECTION="Section:";
-	private String priority;
-	public static final String PRIORITY="Priority:";
-	private String architecture;
-	public static final String ARCHI="Architecture:";
-	private List<String> depends;
-	public static final String DEPENDS="Depends:" ;
-	private String maintainer;
-	public static final String MAINTENER="Maintainer:"; 
-	private String homepage;
-	public static final String HOMEPAGE="Homepage:";
-	private String description;
-	public static final String DESCRIPTION="Description:";
-	
-	
-	
-	public BundleControlWrapper(String bundleControlFile) throws TcEquinoxRegistryException {
-		try {
-			this.extractProperties(Files.readAllLines(new File(bundleControlFile).toPath()));
-			
-		} catch (IOException e) {
-			throw new TcEquinoxRegistryException("Erreur de traitemennt du fichier de control "+bundleControlFile,e);
-		}
-	}
+    public static final String ARCHI = "Architecture:";
+    public static final String DEPENDS = "Depends:";
+    public static final String DESCRIPTION = "Description:";
+    public static final String HOMEPAGE = "Homepage:";
+    public static final String MAINTENER = "Maintainer:";
+    public static final String PACKAGE = "Package:";
+    public static final String PRIORITY = "Priority:";
+    public static final String SECTION = "Section:";
+    public static final String VERSION = "Version:";
+    private String architecture;
+    private List<String> depends;
+    private String description;
+    private String homepage;
+    private String maintainer;
+    private String packageName;
+    private String priority;
+    private String section;
+    private String version;
 
-	
-	private void extractProperties(List<String> values)
-	{
-		for(String s:values)
-		{
-			isPackage(s);
-			isVersion(s);
-			isSection(s);
-			isPriority(s);
-			isArchitecture(s);
-			isDepends(s);
-			isMaintainer(s);
-			isHomePage(s);
-			isDescription(s);
-		}
-	}
-	
-	private void isDescription(String s) {
-		if(s.startsWith(BundleControlWrapper.DESCRIPTION))
-		{
-			this.description=s.replaceAll(BundleControlWrapper.DESCRIPTION,"");
-		}
-	}
+    public BundleControlWrapper(final String bundleControlFile) throws TcEquinoxRegistryException {
+        try {
+            extractProperties(Files.readAllLines(new File(bundleControlFile).toPath()));
 
+        } catch (final IOException e) {
+            throw new TcEquinoxRegistryException("Erreur de traitemennt du fichier de control " + bundleControlFile, e);
+        }
+    }
 
-	private void isHomePage(String s) {
-		if(s.startsWith(BundleControlWrapper.HOMEPAGE))
-		{
-			this.homepage=s.replaceAll(BundleControlWrapper.HOMEPAGE,"");
-		}
-		
-	}
+    private void extractProperties(final List<String> values) {
+        for (final String s : values) {
+            isPackage(s);
+            isVersion(s);
+            isSection(s);
+            isPriority(s);
+            isArchitecture(s);
+            isDepends(s);
+            isMaintainer(s);
+            isHomePage(s);
+            isDescription(s);
+        }
+    }
 
+    public String getArchitecture() {
+        return architecture;
+    }
 
-	private void isMaintainer(String s) {
-		if(s.startsWith(BundleControlWrapper.MAINTENER))
-		{
-			this.maintainer=s.replaceAll(BundleControlWrapper.MAINTENER,"");
-		}
-	}
+    public List<String> getDepends() {
+        return depends;
+    }
 
+    public String getDescription() {
+        return description;
+    }
 
-	private void isDepends(String s) {
-		if(s.startsWith(BundleControlWrapper.DEPENDS))
-		{
-			this.depends=Arrays.asList(s.replaceAll(BundleControlWrapper.DEPENDS,"").split(","));  
-		}
-	}
+    public String getHomepage() {
+        return homepage;
+    }
 
+    public String getMaintainer() {
+        return maintainer;
+    }
 
-	private void isArchitecture(String s) {
-		if(s.startsWith(BundleControlWrapper.ARCHI))
-		{
-			this.architecture=s.replaceAll(BundleControlWrapper.ARCHI,"");
-		}
-	}
+    public String getPackageName() {
+        return packageName;
+    }
 
+    public String getPriority() {
+        return priority;
+    }
 
-	private void isPriority(String s) {
-		if(s.startsWith(BundleControlWrapper.PRIORITY))
-		{
-			this.priority=s.replaceAll(BundleControlWrapper.PRIORITY,"");
-		}
-	}
+    public String getSection() {
+        return section;
+    }
 
+    public String getVersion() {
+        return version;
+    }
 
-	private void isSection(String s) {
-		if(s.startsWith(BundleControlWrapper.SECTION))
-		{
-			this.section=s.replaceAll(BundleControlWrapper.SECTION,"");
-		}
-		
-	}
+    private void isArchitecture(final String s) {
+        if (s.startsWith(BundleControlWrapper.ARCHI)) {
+            architecture = s.replaceAll(BundleControlWrapper.ARCHI, "");
+        }
+    }
 
+    private void isDepends(final String s) {
+        if (s.startsWith(BundleControlWrapper.DEPENDS)) {
+            depends = Arrays.asList(s.replaceAll(BundleControlWrapper.DEPENDS, "").split(","));
+        }
+    }
 
-	private void isVersion(String s) {
-		if(s.startsWith(BundleControlWrapper.VERSION))
-		{
-			this.version=s.replaceAll(BundleControlWrapper.VERSION,"");
-		}
-	}
+    private void isDescription(final String s) {
+        if (s.startsWith(BundleControlWrapper.DESCRIPTION)) {
+            description = s.replaceAll(BundleControlWrapper.DESCRIPTION, "");
+        }
+    }
 
+    private void isHomePage(final String s) {
+        if (s.startsWith(BundleControlWrapper.HOMEPAGE)) {
+            homepage = s.replaceAll(BundleControlWrapper.HOMEPAGE, "");
+        }
 
-	private void isPackage(String s) {
-		if(s.startsWith(BundleControlWrapper.PACKAGE))
-		{
-			this.packageName=s.replaceAll(BundleControlWrapper.PACKAGE,"");
-		}
-	}
+    }
 
-	public List<String> getDepends() {
-		return depends;
-	}
+    private void isMaintainer(final String s) {
+        if (s.startsWith(BundleControlWrapper.MAINTENER)) {
+            maintainer = s.replaceAll(BundleControlWrapper.MAINTENER, "");
+        }
+    }
 
+    private void isPackage(final String s) {
+        if (s.startsWith(BundleControlWrapper.PACKAGE)) {
+            packageName = s.replaceAll(BundleControlWrapper.PACKAGE, "");
+        }
+    }
 
-	public void setDepends(List<String> depends) {
-		this.depends = depends;
-	}
-	
-	
-	public String getPackageName() {
-		return packageName;
-	}
+    private void isPriority(final String s) {
+        if (s.startsWith(BundleControlWrapper.PRIORITY)) {
+            priority = s.replaceAll(BundleControlWrapper.PRIORITY, "");
+        }
+    }
 
+    private void isSection(final String s) {
+        if (s.startsWith(BundleControlWrapper.SECTION)) {
+            section = s.replaceAll(BundleControlWrapper.SECTION, "");
+        }
 
-	public void setPackageName(String packageName) {
-		this.packageName = packageName;
-	}
+    }
 
+    private void isVersion(final String s) {
+        if (s.startsWith(BundleControlWrapper.VERSION)) {
+            version = s.replaceAll(BundleControlWrapper.VERSION, "");
+        }
+    }
 
-	public String getVersion() {
-		return version;
-	}
+    public void setArchitecture(final String architecture) {
+        this.architecture = architecture;
+    }
 
+    public void setDepends(final List<String> depends) {
+        this.depends = depends;
+    }
 
-	public void setVersion(String version) {
-		this.version = version;
-	}
+    public void setDescription(final String description) {
+        this.description = description;
+    }
 
+    public void setHomepage(final String homepage) {
+        this.homepage = homepage;
+    }
 
-	public String getSection() {
-		return section;
-	}
+    public void setMaintainer(final String maintainer) {
+        this.maintainer = maintainer;
+    }
 
+    public void setPackageName(final String packageName) {
+        this.packageName = packageName;
+    }
 
-	public void setSection(String section) {
-		this.section = section;
-	}
+    public void setPriority(final String priority) {
+        this.priority = priority;
+    }
 
+    public void setSection(final String section) {
+        this.section = section;
+    }
 
-	public String getPriority() {
-		return priority;
-	}
-
-
-	public void setPriority(String priority) {
-		this.priority = priority;
-	}
-
-
-	public String getArchitecture() {
-		return architecture;
-	}
-
-
-	public void setArchitecture(String architecture) {
-		this.architecture = architecture;
-	}
-
-
-	
-	public String getMaintainer() {
-		return maintainer;
-	}
-
-
-	public void setMaintainer(String maintainer) {
-		this.maintainer = maintainer;
-	}
-
-
-	public String getHomepage() {
-		return homepage;
-	}
-
-
-	public void setHomepage(String homepage) {
-		this.homepage = homepage;
-	}
-
-
-	public String getDescription() {
-		return description;
-	}
-
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setVersion(final String version) {
+        this.version = version;
+    }
 }

@@ -37,13 +37,13 @@
 		<className>org.tc.osgi.equinox.loader.cmd.context.StartDefaultBundleCmd</className>
 	</configFiles>
 	<configFiles>
-		<defaultValue>${manager.version}${snapshot.xml.delimiter}${snapshot}</defaultValue>
+		<defaultValue>${tc-osgi-bundle-manager.version}${tc-osgi-bundle-manager.xml}${tc-osgi-bundle-manager.snapshot}</defaultValue>
 		<valueType>java.lang.String</valueType>
 		<fieldName>managerDependencyBundleVersion</fieldName>
 		<className>org.tc.osgi.equinox.loader.cmd.context.StartDefaultBundleCmd</className>
 	</configFiles>
 	<configFiles>
-		<defaultValue>${utils.version}${snapshot.xml.delimiter}${snapshot}</defaultValue>
+		<defaultValue>${tc-osgi-bundle-utils.version}${tc-osgi-bundle-utils.xml}${tc-osgi-bundle-utils.snapshot}</defaultValue>
 		<valueType>java.lang.String</valueType>
 		<fieldName>utilsDependencyBundleVersion</fieldName>
 		<className>org.tc.osgi.equinox.loader.cmd.context.StartDefaultBundleCmd</className>

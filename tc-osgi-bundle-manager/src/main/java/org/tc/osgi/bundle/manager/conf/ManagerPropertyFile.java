@@ -26,14 +26,6 @@ public class ManagerPropertyFile extends AbstractPropertyFile {
      * String UTILS_FILE.
      */
     private final static String UTILS_FILE = "manager";
-    
-    private String bundleDirectory;
-    private String bundleLocalBase;
-    
-    private String staticRepositoryUrl;
-    private String staticRepositoryName;
-    private String workDirectory;
-    private String bundlesDirectory;
 
     /**
      * getInstance.
@@ -46,15 +38,24 @@ public class ManagerPropertyFile extends AbstractPropertyFile {
         return ManagerPropertyFile.instance;
     }
 
+    private String bundleDirectory;
+
+    private String bundleLocalBase;
+    private String bundlesDirectory;
     /**
      * String jaxbContext.
      */
     private String jaxbContext = null;
-
     /**
      * String log4jFile.
      */
     private String log4jFile = null;
+
+    private String staticRepositoryName;
+
+    private String staticRepositoryUrl;
+
+    private String workDirectory;
 
     /**
      * String xmlPropertiesExt.
@@ -68,6 +69,20 @@ public class ManagerPropertyFile extends AbstractPropertyFile {
         super(ManagerPropertyFile.UTILS_FILE, ManagerPropertyFile.class.getClassLoader());
     }
 
+    public String getBundleDirectory() throws FieldTrackingAssignementException {
+        if (bundleDirectory == null) {
+            PropertyServiceProxy.getInstance().getXMLPropertyFile(getXMLFile()).fieldTraking(this, "bundleDirectory");
+        }
+        return bundleDirectory;
+    }
+
+    public String getBundleLocalBase() throws FieldTrackingAssignementException {
+        if (bundleLocalBase == null) {
+            PropertyServiceProxy.getInstance().getXMLPropertyFile(getXMLFile()).fieldTraking(this, "bundleLocalBase");
+        }
+        return bundleLocalBase;
+    }
+
     /**
      * @return String
      * @see org.tc.osgi.bundle.utils.conf.AbstractPropertyFile#getBundleRacine()
@@ -75,6 +90,13 @@ public class ManagerPropertyFile extends AbstractPropertyFile {
     @Override
     public String getBundleRacine() {
         return ManagerPropertyFile.BUNDLE_RACINE;
+    }
+
+    public String getBundlesDirectory() {
+        if (bundlesDirectory == null) {
+            bundlesDirectory = getResourceBundle().getString(getBundleRacine() + "bundles_directory");
+        }
+        return bundlesDirectory;
     }
 
     /**
@@ -96,35 +118,7 @@ public class ManagerPropertyFile extends AbstractPropertyFile {
         }
         return jaxbContext;
     }
-    public String getStaticRepositoryUrl() {
-        if (staticRepositoryUrl == null) {
-        	staticRepositoryUrl = getResourceBundle().getString(getBundleRacine() + "static_repository_url");
-        }
-        return staticRepositoryUrl;
-    }
-    
-    public String getStaticRepositoryFile() {
-        if (staticRepositoryName == null) {
-        	staticRepositoryName = getResourceBundle().getString(getBundleRacine() + "static_repository_file");
-        }
-        return staticRepositoryName;
-    }
-    
-    // TODO refaire la liaison entre le repertoire des targz et le repertoire de travail de spark pour que celui ci soit capable d'aller chercher les tar
-    public String getWorkDirectory() {
-        if (workDirectory == null) {
-        	workDirectory = getResourceBundle().getString(getBundleRacine() + "work_directory");
-        }
-        return workDirectory;
-    }
-    
-    public String getBundlesDirectory() {
-        if (bundlesDirectory == null) {
-        	bundlesDirectory = getResourceBundle().getString(getBundleRacine() + "bundles_directory");
-        }
-        return bundlesDirectory;
-    }
-    
+
     /**
      * getLog4jFile.
      * @return String
@@ -134,6 +128,29 @@ public class ManagerPropertyFile extends AbstractPropertyFile {
             log4jFile = getResourceBundle().getString(getBundleRacine() + "log4j.file");
         }
         return log4jFile;
+    }
+
+    public String getStaticRepositoryFile() {
+        if (staticRepositoryName == null) {
+            staticRepositoryName = getResourceBundle().getString(getBundleRacine() + "static_repository_file");
+        }
+        return staticRepositoryName;
+    }
+
+    public String getStaticRepositoryUrl() {
+        if (staticRepositoryUrl == null) {
+            staticRepositoryUrl = getResourceBundle().getString(getBundleRacine() + "static_repository_url");
+        }
+        return staticRepositoryUrl;
+    }
+
+    // TODO refaire la liaison entre le repertoire des targz et le repertoire de
+    // travail de spark pour que celui ci soit capable d'aller chercher les tar
+    public String getWorkDirectory() {
+        if (workDirectory == null) {
+            workDirectory = getResourceBundle().getString(getBundleRacine() + "work_directory");
+        }
+        return workDirectory;
     }
 
     /**
@@ -156,20 +173,4 @@ public class ManagerPropertyFile extends AbstractPropertyFile {
         }
         return xmlPropertiesExt;
     }
-
-	public String getBundleDirectory() throws FieldTrackingAssignementException {
-		if (bundleDirectory == null) {
-			PropertyServiceProxy.getInstance().getXMLPropertyFile(getXMLFile()).fieldTraking(this, "bundleDirectory");
-        }
-        return bundleDirectory;
-	}
-
-	
-	public String getBundleLocalBase() throws FieldTrackingAssignementException
-	{
-		if (bundleLocalBase == null) {
-			PropertyServiceProxy.getInstance().getXMLPropertyFile(getXMLFile()).fieldTraking(this, "bundleLocalBase");
-        }
-        return bundleLocalBase;
-	}
 }

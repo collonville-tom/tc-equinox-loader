@@ -14,7 +14,7 @@
 		<className>org.tc.osgi.bundle.manager.conf.ManagerPropertyFile</className>
 	</configFiles>
 	<configFiles>
-		<defaultValue>${groovy.version}</defaultValue>
+		<defaultValue>${tc-osgi-bundle-groovy.version}</defaultValue>
 		<valueType>java.lang.String</valueType>
 		<fieldName>groovyDependencyBundleVersion</fieldName>
 		<className>org.tc.osgi.bundle.manager.module.activator.ManagerActivator</className>

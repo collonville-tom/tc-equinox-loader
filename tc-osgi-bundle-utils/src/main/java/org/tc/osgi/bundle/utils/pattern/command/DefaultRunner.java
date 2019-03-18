@@ -15,15 +15,15 @@ import org.tc.osgi.bundle.utils.module.service.impl.CommandRunnerUtilsServiceImp
  */
 public final class DefaultRunner implements ICommand {
 
-	/**
-	 *
-	 * @see org.tc.osgi.bundle.utils.pattern.command.ICommand#exec()
-	 */
-	@Override
-	public void exec() throws CommandExecutionException {
-		final Iterator<ICommand> it = CommandRunnerUtilsServiceImpl.getInstance().getRepository().getCommandsIterator();
-		while (it.hasNext()) {
-			((ICommand) it.next()).exec();
-		}
-	}
+    /**
+     *
+     * @see org.tc.osgi.bundle.utils.pattern.command.ICommand#exec()
+     */
+    @Override
+    public void exec() throws CommandExecutionException {
+        final Iterator<ICommand> it = CommandRunnerUtilsServiceImpl.getInstance().getRepository().getCommandsIterator();
+        while (it.hasNext()) {
+            it.next().exec();
+        }
+    }
 }

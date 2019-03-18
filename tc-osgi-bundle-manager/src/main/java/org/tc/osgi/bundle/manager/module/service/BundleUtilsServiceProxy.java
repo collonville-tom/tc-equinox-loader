@@ -15,78 +15,77 @@ import org.tc.osgi.bundle.utils.interf.module.service.IBundleUtilsService;
  */
 public class BundleUtilsServiceProxy implements IBundleUtilsService {
 
-	
-	/**
-	 * UtilsServiceProxy instance.
-	 */
-	private static BundleUtilsServiceProxy instance = null;
+    /**
+     * UtilsServiceProxy instance.
+     */
+    private static BundleUtilsServiceProxy instance = null;
 
-	/**
-	 * getInstance.
-	 * @return UtilsServiceProxy
-	 */
-	public static BundleUtilsServiceProxy getInstance() {
-		if (BundleUtilsServiceProxy.instance == null) {
-			BundleUtilsServiceProxy.instance = new BundleUtilsServiceProxy();
-		}
-		return BundleUtilsServiceProxy.instance;
-	}
+    /**
+     * getInstance.
+     * @return UtilsServiceProxy
+     */
+    public static BundleUtilsServiceProxy getInstance() {
+        if (BundleUtilsServiceProxy.instance == null) {
+            BundleUtilsServiceProxy.instance = new BundleUtilsServiceProxy();
+        }
+        return BundleUtilsServiceProxy.instance;
+    }
 
-	/**
-	 * IUtilsService service.
-	 */
-	private IBundleUtilsService service = null;
+    /**
+     * IUtilsService service.
+     */
+    private IBundleUtilsService service = null;
 
-	/**
-	 * UtilsServiceProxy constructor.
-	 */
-	private BundleUtilsServiceProxy() {
+    /**
+     * UtilsServiceProxy constructor.
+     */
+    private BundleUtilsServiceProxy() {
 
-	}
-	
-	public void setService(final IBundleUtilsService service) {
-		this.service = service;
-	}
-	
-	@Override
-	public BundleContext getBundleContext() throws TcOsgiException {
-		return this.service.getBundleContext();
-	}
+    }
 
-	@Override
-	public IBundleCommand getBundleKiller() {
-		return this.service.getBundleKiller();
-	}
+    @Override
+    public BundleContext getBundleContext() throws TcOsgiException {
+        return service.getBundleContext();
+    }
 
-	@Override
-	public IBundleCommand getBundleStarter() {
-		return this.service.getBundleStarter();
-	}
+    @Override
+    public IBundleCommand getBundleInstaller() {
+        return service.getBundleInstaller();
+    }
 
-	@Override
-	public void getClassloaderContent(ClassLoader loader) {
-		this.service.getClassloaderContent(loader);
-	}
+    @Override
+    public IBundleCommand getBundleKiller() {
+        return service.getBundleKiller();
+    }
 
-	@Override
-	public <T> void registerService(Class<T> _class, T instance, BundleContext context, BundleActivator activator) {
-		this.service.registerService(_class, instance, context, activator);
-		
-	}
+    @Override
+    public IBundleCommand getBundleStarter() {
+        return service.getBundleStarter();
+    }
 
-	@Override
-	public void unregister(Class _class, BundleActivator activator) {
-		this.service.unregister(_class, activator);
-	}
+    @Override
+    public IBundleCommand getBundleUninstaller() {
+        return service.getBundleUninstaller();
+    }
 
-	public IBundleCommand getBundleUninstaller() {
-		return this.service.getBundleUninstaller();
-	}
+    @Override
+    public void getClassloaderContent(final ClassLoader loader) {
+        service.getClassloaderContent(loader);
+    }
 
-	@Override
-	public IBundleCommand getBundleInstaller() {
-		return this.service.getBundleInstaller();
-	}
+    @Override
+    public <T> void registerService(final Class<T> _class, final T instance, final BundleContext context, final BundleActivator activator) {
+        service.registerService(_class, instance, context, activator);
 
-	
+    }
+
+    public void setService(final IBundleUtilsService service) {
+        this.service = service;
+    }
+
+    @Override
+    public void unregister(final Class _class, final BundleActivator activator) {
+        service.unregister(_class, activator);
+    }
+
 }

@@ -20,22 +20,22 @@ import junit.framework.Assert;
  */
 public class ToolsTest {
 
-	/**
-	 * test.
-	 */
-	@Test
-	public void test() {
-		final List<Integer> l = new ArrayList<Integer>();
-		l.add(1);
-		l.add(2);
-		l.add(3);
-		l.add(4);
-		l.add(5);
-		Assert.assertEquals("1,2,3,4,5", UtilsServiceImpl.getInstance().list2String(l, ","));
+    /**
+     * test.
+     */
+    @Test
+    public void test() {
+        final List<Integer> l = new ArrayList<Integer>();
+        l.add(1);
+        l.add(2);
+        l.add(3);
+        l.add(4);
+        l.add(5);
+        Assert.assertEquals("1,2,3,4,5", UtilsServiceImpl.getInstance().list2String(l, ","));
 
-		final Integer[] tab = { 1, 2, 3, 4, 5, 6 };
-		Assert.assertEquals("1,2,3,4,5,6", UtilsServiceImpl.getInstance().tab2String(tab, ","));
+        final Integer[] tab = { 1, 2, 3, 4, 5, 6 };
+        Assert.assertEquals("1,2,3,4,5,6", UtilsServiceImpl.getInstance().tab2String(tab, ","));
 
-	}
+    }
 
 }

@@ -30,7 +30,7 @@ public class EquinoxLoaderBundleContextImpl implements IEquinoxLoaderBundleConte
      */
     @Override
     public BundleContext getBundleContext() throws FieldTrackingAssignementException {
-        return EclipseStarter.getSystemBundleContext();//EquinoxStarter.getInstance().getContext();
+        return EclipseStarter.getSystemBundleContext();// EquinoxStarter.getInstance().getContext();
     }
 
 }

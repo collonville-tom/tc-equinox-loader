@@ -10,14 +10,14 @@ import java.util.Collection;
  * @track SDD_BUNDLE_UTILS_010
  */
 public interface ITransformer<T> {
-	/**
-	 * evaluate.
-	 *
-	 * @param c
-	 *            Collection<T>
-	 * @param e
-	 *            T
-	 * @return Collection<T>
-	 */
-	void evaluate(Collection<T> c, T e);
+    /**
+     * evaluate.
+     *
+     * @param c
+     *            Collection<T>
+     * @param e
+     *            T
+     * @return Collection<T>
+     */
+    void evaluate(Collection<T> c, T e);
 }

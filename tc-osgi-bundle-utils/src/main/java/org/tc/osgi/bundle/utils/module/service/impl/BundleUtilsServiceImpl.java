@@ -28,81 +28,83 @@ import org.tc.osgi.bundle.utils.rmi.client.EquinoxLoaderRMIClient;
  */
 public class BundleUtilsServiceImpl implements IBundleUtilsService {
 
-	@Override
-	public BundleContext getBundleContext() throws TcOsgiException  {
-		return EquinoxLoaderRMIClient.getInstance().getIEquinoxLoaderBundleContext().getBundleContext();
-	}
+    private final Map<Integer, ServiceRegistration> registry = new HashMap<Integer, ServiceRegistration>();
 
-	/**
-	 * @return
-	 * @see org.tc.osgi.bundle.utils.module.service.IUtilsService#getBundleKiller()
-	 */
-	@Override
-	public IBundleCommand getBundleKiller() {
-		return new BundleKiller();
-	}
+    @Override
+    public BundleContext getBundleContext() throws TcOsgiException {
+        return EquinoxLoaderRMIClient.getInstance().getIEquinoxLoaderBundleContext().getBundleContext();
+    }
 
-	/**
-	 * @return BundleStarter
-	 * @see org.tc.osgi.bundle.utils.module.service.IUtilsService#getBundleStarter()
-	 */
-	@Override
-	public IBundleCommand getBundleStarter() {
-		return new BundleStarter();
-	}
+    @Override
+    public IBundleCommand getBundleInstaller() {
+        return new BundleInstaller();
+    }
 
-	/**
-	 * @param loader ClassLoader
-	 */
-	public void getClassloaderContent(final ClassLoader loader) {
+    /**
+     * @return
+     * @see org.tc.osgi.bundle.utils.module.service.IUtilsService#getBundleKiller()
+     */
+    @Override
+    public IBundleCommand getBundleKiller() {
+        return new BundleKiller();
+    }
 
-		Class clKlass = loader.getClass();
-		final StringBuilder b = new StringBuilder("Classloader: ");
-		b.append(clKlass.getCanonicalName());
-		while (clKlass != java.lang.ClassLoader.class) {
-			clKlass = clKlass.getSuperclass();
-		}
-		try {
-			final java.lang.reflect.Field fldClasses = clKlass.getDeclaredField("classes");
-			fldClasses.setAccessible(true);
-			final Vector classes = (Vector) fldClasses.get(loader);
-			b.append(", Loaded:[");
-			for (final Iterator iter = classes.iterator(); iter.hasNext();) {
-				b.append(iter.next()).append(",");
-			}
-			LoggerGestionnary.getInstance(BundleUtilsServiceImpl.class).debug(b.toString());
-		} catch (final SecurityException e) {
-			e.printStackTrace();
-		} catch (final IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (final NoSuchFieldException e) {
-			e.printStackTrace();
-		} catch (final IllegalAccessException e) {
-			e.printStackTrace();
-		}
-	}
+    /**
+     * @return BundleStarter
+     * @see org.tc.osgi.bundle.utils.module.service.IUtilsService#getBundleStarter()
+     */
+    @Override
+    public IBundleCommand getBundleStarter() {
+        return new BundleStarter();
+    }
 
-	private Map<Integer, ServiceRegistration> registry = new HashMap<Integer, ServiceRegistration>();
+    @Override
+    public IBundleCommand getBundleUninstaller() {
+        return new BundleUninstaller();
+    }
 
-	@Override
-	public <T> void registerService(Class<T> _class, T instance, final BundleContext context, BundleActivator activator) {
-		registry.put(activator.hashCode() + _class.hashCode(), context.registerService(_class.getName(), new TcOsgiServiceFactory<T>(instance), null));
-	}
+    /**
+     * @param loader ClassLoader
+     */
+    @Override
+    public void getClassloaderContent(final ClassLoader loader) {
 
-	@Override
-	public void unregister(Class _class, BundleActivator activator) {
-		registry.get(activator.hashCode() + _class.hashCode()).unregister();
-		registry.remove(activator.hashCode() + _class.hashCode());
+        Class clKlass = loader.getClass();
+        final StringBuilder b = new StringBuilder("Classloader: ");
+        b.append(clKlass.getCanonicalName());
+        while (clKlass != java.lang.ClassLoader.class) {
+            clKlass = clKlass.getSuperclass();
+        }
+        try {
+            final java.lang.reflect.Field fldClasses = clKlass.getDeclaredField("classes");
+            fldClasses.setAccessible(true);
+            final Vector classes = (Vector) fldClasses.get(loader);
+            b.append(", Loaded:[");
+            for (final Iterator iter = classes.iterator(); iter.hasNext();) {
+                b.append(iter.next()).append(",");
+            }
+            LoggerGestionnary.getInstance(BundleUtilsServiceImpl.class).debug(b.toString());
+        } catch (final SecurityException e) {
+            e.printStackTrace();
+        } catch (final IllegalArgumentException e) {
+            e.printStackTrace();
+        } catch (final NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (final IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
 
-	}
+    @Override
+    public <T> void registerService(final Class<T> _class, final T instance, final BundleContext context, final BundleActivator activator) {
+        registry.put(activator.hashCode() + _class.hashCode(), context.registerService(_class.getName(), new TcOsgiServiceFactory<T>(
+            instance), null));
+    }
 
-	@Override
-	public IBundleCommand getBundleUninstaller() {
-		return new BundleUninstaller();
-	}
+    @Override
+    public void unregister(final Class _class, final BundleActivator activator) {
+        registry.get(activator.hashCode() + _class.hashCode()).unregister();
+        registry.remove(activator.hashCode() + _class.hashCode());
 
-	@Override
-	public IBundleCommand getBundleInstaller() {
-		return new BundleInstaller();
-	}
+    }
 }

@@ -18,69 +18,73 @@ import org.tc.osgi.bundle.utils.serial.SerialTool;
  */
 public class UtilsServiceImpl implements IUtilsService {
 
-	private static UtilsServiceImpl instance = null;
+    private static UtilsServiceImpl instance = null;
 
-	public static UtilsServiceImpl getInstance() {
-		if (UtilsServiceImpl.instance == null) {
-			UtilsServiceImpl.instance = new UtilsServiceImpl();
-		}
-		return UtilsServiceImpl.instance;
-	}
+    public static UtilsServiceImpl getInstance() {
+        if (UtilsServiceImpl.instance == null) {
+            UtilsServiceImpl.instance = new UtilsServiceImpl();
+        }
+        return UtilsServiceImpl.instance;
+    }
 
-	/**
-	 * @return SerialTool<Serializable>
-	 *
-	 * @see org.tc.osgi.bundle.utils.module.service.IUtilsService#getSerialTool()
-	 */
-	@Override
-	public <T extends Serializable> ISerialTool<T> getSerialTool() {
-		return new SerialTool<T>();
-	}
+    @Override
+    public boolean contains(final Annotation[] annots, final Class<?> ann) {
+        for (int i = 0; i < annots.length; i++) {
+            if (ann.equals(annots[i].annotationType())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	public boolean contains(Annotation[] annots, Class<?> ann) {
-		for (int i = 0; i < annots.length; i++) {
-			if (ann.equals(annots[i].annotationType()))
-				return true;
-		}
-		return false;
-	}
+    /**
+     * @return SerialTool<Serializable>
+     *
+     * @see org.tc.osgi.bundle.utils.module.service.IUtilsService#getSerialTool()
+     */
+    @Override
+    public <T extends Serializable> ISerialTool<T> getSerialTool() {
+        return new SerialTool<T>();
+    }
 
-	/**
-	 * list2String.
-	 *
-	 * @param chaines
-	 *            List<String>
-	 * @return String
-	 */
-	public String list2String(final List chaines, final String delimiter) {
-		final StringBuilder buff = new StringBuilder();
-		final Iterator it = chaines.iterator();
-		for (; it.hasNext();) {
-			final Object o = it.next();
-			buff.append(o.toString());
-			if (chaines.indexOf(o) != (chaines.size() - 1)) {
-				buff.append(delimiter);
-			}
-		}
-		return buff.toString();
-	}
+    /**
+     * list2String.
+     *
+     * @param chaines
+     *            List<String>
+     * @return String
+     */
+    @Override
+    public String list2String(final List chaines, final String delimiter) {
+        final StringBuilder buff = new StringBuilder();
+        final Iterator it = chaines.iterator();
+        for (; it.hasNext();) {
+            final Object o = it.next();
+            buff.append(o.toString());
+            if (chaines.indexOf(o) != (chaines.size() - 1)) {
+                buff.append(delimiter);
+            }
+        }
+        return buff.toString();
+    }
 
-	/**
-	 * list2String.
-	 * @param tab T[]
-	 * @param delimiter String
-	 * @return <T>
-	 */
-	public <T> String tab2String(final T[] tab, final String delimiter) {
-		final StringBuilder buff = new StringBuilder();
-		for (int i = 0; i < tab.length; i++) {
+    /**
+     * list2String.
+     * @param tab T[]
+     * @param delimiter String
+     * @return <T>
+     */
+    @Override
+    public <T> String tab2String(final T[] tab, final String delimiter) {
+        final StringBuilder buff = new StringBuilder();
+        for (int i = 0; i < tab.length; i++) {
 
-			buff.append(tab[i].toString());
-			if (i != (tab.length - 1)) {
-				buff.append(delimiter);
-			}
-		}
-		return buff.toString();
-	}
+            buff.append(tab[i].toString());
+            if (i != (tab.length - 1)) {
+                buff.append(delimiter);
+            }
+        }
+        return buff.toString();
+    }
 
 }
