@@ -105,10 +105,10 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 		List<ServiceWrapper> wrapper = new ArrayList<>();
 		try {
 			Bundle bundle = this.retrieveBundle(bundleName);
-			ServiceReference<?>[] services;
+			ServiceReference[] services;
 			services = bundle.getRegisteredServices();
 			if (services != null) {
-				for (ServiceReference<?> service : services) {
+				for (ServiceReference service : services) {
 					LoggerServiceProxy.getInstance().getLogger(EquinoxRegistry.class).debug("Traitement du service: " + service);
 					wrapper.add(new ServiceWrapper(service));
 				}
@@ -127,11 +127,11 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 		LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).debug("Retreive services list");
 		List<ServiceWrapper> wrapper = new ArrayList<>();
 
-		ServiceReference<?>[] services;
+		ServiceReference[] services;
 		try {
 			services = getBundleContext().getServiceReferences((String) null, (String) null);
 			if (services != null) {
-				for (ServiceReference<?> service : services) {
+				for (ServiceReference service : services) {
 					LoggerServiceProxy.getInstance().getLogger(EquinoxRegistry.class).debug("Traitement du service: " + service);
 					wrapper.add(new ServiceWrapper(service));
 				}

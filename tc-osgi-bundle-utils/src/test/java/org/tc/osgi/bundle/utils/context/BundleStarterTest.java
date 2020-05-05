@@ -32,7 +32,7 @@ public class BundleStarterTest {
         final String bundleName = "mockBundle";
         final String version = "versionBundle";
 
-        Dictionary<String, String> d = new Headers<String, String>(1);
+        Dictionary<String, String> d = new Headers(1);
         d.put(BundleStarter.VERSION_H, version);
 
         final Bundle mockbundle = Mockito.mock(Bundle.class);

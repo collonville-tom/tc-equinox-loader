@@ -10,6 +10,7 @@ import org.tc.osgi.bundle.utils.interf.rmi.IEquinoxLoaderBundleContext;
 import org.tc.osgi.bundle.utils.logger.LoggerGestionnary;
 import org.tc.osgi.bundle.utils.module.service.impl.UtilsServiceImpl;
 import org.tc.osgi.equinox.loader.cmd.context.FilterValidBundleCmd;
+import org.tc.osgi.equinox.loader.cmd.context.ListValidBundleCmd;
 import org.tc.osgi.equinox.loader.cmd.context.LoadDefaultBundleCmd;
 import org.tc.osgi.equinox.loader.cmd.context.StartDefaultBundleCmd;
 import org.tc.osgi.equinox.loader.cmd.exception.EquinoxCmdException;
@@ -64,6 +65,10 @@ public final class EquinoxLoaderMain {
                 LoggerGestionnary.getInstance(EquinoxLoaderMain.class).debug("FilterValidBundleCmd");
                 LoggerGestionnary.getInstance(EquinoxLoaderMain.class).debug("####################");
                 new FilterValidBundleCmd(EquinoxStarter.getInstance().getContext()).execute();
+                LoggerGestionnary.getInstance(EquinoxLoaderMain.class).debug("####################");
+                LoggerGestionnary.getInstance(EquinoxLoaderMain.class).debug("ListValidBundleCmd");
+                LoggerGestionnary.getInstance(EquinoxLoaderMain.class).debug("####################");
+                new ListValidBundleCmd(EquinoxStarter.getInstance().getContext()).execute();
                 LoggerGestionnary.getInstance(EquinoxLoaderMain.class).debug("####################");
                 LoggerGestionnary.getInstance(EquinoxLoaderMain.class).debug("StartDefaultBundleCmd");
                 LoggerGestionnary.getInstance(EquinoxLoaderMain.class).debug("####################");

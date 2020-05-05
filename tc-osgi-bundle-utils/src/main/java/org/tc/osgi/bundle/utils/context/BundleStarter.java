@@ -9,6 +9,7 @@ import org.tc.osgi.bundle.utils.logger.LoggerGestionnary;
 
 /**
  * BundleStarter.java.
+ *
  * @author collonville thomas
  * @version 0.2.0
  * @track SDD_BUNDLE_UTILS_125
@@ -16,36 +17,37 @@ import org.tc.osgi.bundle.utils.logger.LoggerGestionnary;
  */
 public class BundleStarter implements IBundleCommand {
 
-	/**
-	 * startBundle.
-	 * @param context BundleContext
-	 * @param bundleName String
-	 * @throws BundleException
-	 */
+    /**
+     * startBundle.
+     *
+     * @param context    BundleContext
+     * @param bundleName String
+     * @throws BundleException
+     */
 
-	public void startBundle(final BundleContext context, final String bundleName, String bundleVersion) throws BundleException {
-		final Bundle[] bundles = context.getBundles();
+    public void startBundle(final BundleContext context, final String bundleName, String bundleVersion) throws BundleException {
+        final Bundle[] bundles = context.getBundles();
 
-		for (int i = 0; i < bundles.length; i++) {
-			if (bundles[i].getSymbolicName().equals(bundleName)) {
-				LoggerGestionnary.getInstance(BundleStarter.class).debug("Header " + bundles[i].getHeaders().get(VERSION_H) + "but is:" +bundleVersion);
-				if (bundles[i].getHeaders().get(VERSION_H).equals(bundleVersion)) {
-				LoggerGestionnary.getInstance(BundleStarter.class).debug("Start of " + bundles[i].getSymbolicName() + ", state:" + bundles[i].getState());
-				if (bundles[i].getState() != Bundle.STARTING) { // =8,
-					// RESOLVED=4
-					bundles[i].start();
-				}
-				}
-			}
-		}
-	}
+        for (int i = 0; i < bundles.length; i++) {
+            if (bundles[i].getSymbolicName().equals(bundleName)) {
+                LoggerGestionnary.getInstance(BundleStarter.class).debug("Header " + bundles[i].getHeaders().get(VERSION_H) + "but is:" + bundleVersion);
+                if (bundles[i].getHeaders().get(VERSION_H).equals(bundleVersion)) {
+                    LoggerGestionnary.getInstance(BundleStarter.class).debug("Start of " + bundles[i].getSymbolicName() + ", state:" + bundles[i].getState());
+                    if (bundles[i].getState() != Bundle.STARTING) { // =8,
+                        // RESOLVED=4
+                        bundles[i].start();
+                    }
+                }
+            }
+        }
+    }
 
-	@Override
-	public void processOnBundle(BundleContext context, String bundleName,String version) throws TcOsgiException {
-		try {
-			this.startBundle(context, bundleName,version);
-		} catch (BundleException e) {
-			throw new TcOsgiException("Erreur lors du lancement du bundle " + bundleName, e);
-		}
-	}
+    @Override
+    public void processOnBundle(BundleContext context, String bundleName, String version) throws TcOsgiException {
+        try {
+            this.startBundle(context, bundleName, version);
+        } catch (BundleException e) {
+            throw new TcOsgiException("Erreur lors du lancement du bundle " + bundleName, e);
+        }
+    }
 }

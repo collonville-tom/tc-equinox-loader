@@ -15,7 +15,7 @@ public class ServiceWrapper {
 	
 	
 
-	public ServiceWrapper(ServiceReference<?> service) {
+	public ServiceWrapper(ServiceReference service) {
 
 		String[] ss = service.getPropertyKeys();
 		if (ss != null) {

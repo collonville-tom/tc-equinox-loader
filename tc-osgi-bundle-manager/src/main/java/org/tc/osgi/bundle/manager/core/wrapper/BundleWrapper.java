@@ -24,8 +24,8 @@ public class BundleWrapper {
 		this.state=bundle.getState();
 		this.stateSignification=BundleStateEnum.detect(this.state).toString();
 		this.location=bundle.getLocation();
-		this.majorVersion=bundle.getVersion().getMajor();
-		this.minorVersion=bundle.getVersion().getMinor();
+		//this.majorVersion=bundle.getVersion().getMajor();
+		//this.minorVersion=bundle.getVersion().getMinor();
 	}
 
 	

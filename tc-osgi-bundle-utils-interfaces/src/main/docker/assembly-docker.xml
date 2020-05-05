@@ -16,6 +16,7 @@
 			<outputDirectory>/opt/equinox-loader/bundles</outputDirectory>
 			<includes>
 				<include>log4j:log4j*</include>
+				<include>*jmdns*</include>
 				<include>*:assembly</include>
 				<include>org.eclipse:osgi*</include>
                 <include>org.eclipse.tycho:org.eclipse.osgi*</include>

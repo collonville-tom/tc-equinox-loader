@@ -15,7 +15,11 @@
 			<useProjectAttachments>true</useProjectAttachments>
 			<outputDirectory>/opt/equinox-loader/bundles</outputDirectory>
 			<includes>
+				<include>*stax*</include>
+				<include>*FastInfoset*</include>
+				<include>*txw2*</include>
 				<include>*jaxb*</include>
+				<include>*jmdns*</include>
 				<include>*javax*</include>
 				<include>*istack*</include>
 				<include>*log4j*</include>

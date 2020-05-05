@@ -59,6 +59,12 @@
 			<version>3.13.0.v20180226-1711</version>
 			<scope>compile</scope>
 		</dependency>
+	<!--	<dependency>
+			<groupId>com.anaptecs.jeaf.owalibs</groupId>
+			<artifactId>org.eclipse.osgi</artifactId>
+			<version>4.3.1</version>
+			<scope>compile</scope>
+		</dependency>-->
 	</dependencies>
 
 	<parent>
